@@ -1,0 +1,16 @@
+# local tool installs / caches
+.local/
+.cache/
+
+# OCCT checkout + build
+occt/
+build-occt/
+
+# generated maps (keep .md/.json if you want to commit them)
+notes/maps/*.dot
+notes/maps/*.svg
+notes/maps/cmake-targets.dot
+notes/maps/cmake-targets.svg
+
+# misc
+.DS_Store
