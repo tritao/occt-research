@@ -15,10 +15,15 @@ if [ ! -d "./backlog" ]; then
 fi
 
 # Avoid duplicate tasks if already seeded.
-if rg -n --fixed-strings "$TITLE" backlog >/dev/null 2>&1; then
+if command -v rg >/dev/null 2>&1; then
+  found="$(rg -n --fixed-strings "$TITLE" backlog || true)"
+else
+  found="$(grep -R --fixed-strings --line-number "$TITLE" backlog 2>/dev/null || true)"
+fi
+if [ -n "$found" ]; then
   echo "[backlog] Task already exists: $TITLE"
   exit 0
 fi
 
-backlog task add "$TITLE"
+backlog task create "$TITLE"
 echo "[backlog] Added task: $TITLE"
