@@ -2,9 +2,9 @@
 id: task-5.3
 title: 'Repro+Oracle: brep-geometry-bridge'
 status: Done
-assignee:
+assignee: []
 created_date: '2026-01-15 01:00'
-updated_date: '2026-01-15 01:54:26'
+updated_date: '2026-01-15 02:13'
 labels:
   - 'lane:brep-geometry-bridge'
   - 'type:oracle'
@@ -13,6 +13,7 @@ dependencies:
   - task-5.2
 parent_task_id: task-5
 ---
+
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
@@ -52,4 +53,6 @@ Primary artifacts:
 - How to run: `just occt-build` then `bash repros/lane-brep-geometry-bridge/run.sh`.
 - Match criteria: exact for non-floats; floats within `eps=1e-9` (documented in the repro README).
 - Not covered yet: seam/closed-surface edges with two pcurves, non-planar surfaces (cylinder), and deeper polygon-on-triangulation details.
+
+Fixed `repros/lane-brep-geometry-bridge/run.sh` repo-root detection; verified OCCT deps are buildable (`cmake --build build-occt --target TKMesh TKTopAlgo TKGeomAlgo TKBRep TKGeomBase TKPrim TKG3d TKG2d TKMath TKernel`) and repro runs (`bash repros/lane-brep-geometry-bridge/run.sh`).
 <!-- SECTION:NOTES:END -->
