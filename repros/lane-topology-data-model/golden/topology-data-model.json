@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "occt_version": "7.9.3",
+    "occt_dev": ""
+  },
+  "identity": {
+    "instA_orientation": "FORWARD",
+    "instARev_orientation": "REVERSED",
+    "instA_vs_instB": {
+      "is_partner": true,
+      "is_same": false,
+      "is_equal": false
+    },
+    "instA_vs_instARev": {
+      "is_partner": true,
+      "is_same": true,
+      "is_equal": false
+    },
+    "vertex_subshape_instA_vs_instB": {
+      "is_partner": true,
+      "is_same": false,
+      "is_equal": false
+    }
+  },
+  "location": {
+    "instB_translation": [10, 0, 0]
+  },
+  "maps": {
+    "indexed_map_of_shape_sizes": {
+      "after_instA": 1,
+      "after_instARev": 1,
+      "after_instB": 2
+    }
+  },
+  "traversal": {
+    "instA_vertex_count": 8,
+    "instB_vertex_count": 8,
+    "compound_unique_vertex_count": 16,
+    "instA_vertices_sorted_first4": [[0, 0, 0], [0, 0, 3], [0, 2, 0], [0, 2, 3]],
+    "instB_vertices_sorted_first4": [[10, 0, 0], [10, 0, 3], [10, 2, 0], [10, 2, 3]]
+  }
+}
