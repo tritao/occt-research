@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "occt_version": "7.9.3",
+    "occt_dev": ""
+  },
+  "params": {
+    "gap_y": 5.0000000000000004e-06,
+    "precision_confusion": 9.9999999999999995e-08,
+    "max_tolerance": 0.0001
+  },
+  "before": {
+    "has_vertices": true,
+    "topo_closed": false,
+    "gap": 5.0000000000000004e-06,
+    "v_first_tolerance": 9.9999999999999995e-08,
+    "v_last_tolerance": 9.9999999999999995e-08
+  },
+  "fix": {
+    "fix_reorder_return": false,
+    "fix_connected_return": true,
+    "status_connected": { "ok": false, "done": true, "fail": false },
+    "fix_closed_return": false,
+    "status_closed": { "ok": true, "done": false, "fail": false }
+  },
+  "after": {
+    "has_vertices": true,
+    "topo_closed": true,
+    "gap": 0,
+    "v_first_tolerance": 2.6002600000000001e-06,
+    "v_last_tolerance": 2.6002600000000001e-06
+  }
+}
