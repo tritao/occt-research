@@ -64,7 +64,7 @@ Describe OCCT’s core topological data model: how shapes are represented and sh
 
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `tools/repros/lane-topology-data-model/` if/when needed).
+Not created for this dossier (can be added under `repros/lane-topology-data-model/` if/when needed).
 
 ## Compare to papers / alternatives
 

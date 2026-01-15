@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "md_lane_map.strict.schema.json",
+  "title": "OCCT lane map markdown (extracted, strict)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "path", "title", "headings"],
+  "properties": {
+    "kind": { "const": "lane-map" },
+    "path": { "type": "string" },
+    "title": { "type": "string", "minLength": 1 },
+    "headings": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "allOf": [
+    { "properties": { "path": { "pattern": "^notes/maps/lane-.+\\.md$" } } },
+    { "properties": { "headings": { "contains": { "pattern": "^# Lane map:" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Provenance (required)" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Package footprint (size proxy)" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Core types / entry points (with code citations)" } } } },
+    {
+      "properties": {
+        "headings": {
+          "anyOf": [
+            { "contains": { "const": "## Include graph evidence (who pulls these packages in)" } },
+            { "contains": { "pattern": "^## Include graph evidence \\(" } }
+          ]
+        }
+      }
+    },
+    {
+      "properties": {
+        "headings": {
+          "anyOf": [
+            { "contains": { "const": "## Local dependency shape (what these packages depend on)" } },
+            { "contains": { "const": "## Robustness / guardrails (observed)" } }
+          ]
+        }
+      }
+    },
+    { "properties": { "headings": { "contains": { "const": "## Suggested dossier entry points (next task)" } } } }
+  ]
+}

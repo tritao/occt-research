@@ -2,9 +2,9 @@
 id: task-9.2
 title: 'Dossier: data-exchange'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 00:44'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:data-exchange'
   - 'type:dossier'
@@ -12,21 +12,17 @@ dependencies:
   - task-9.1
 parent_task_id: task-9
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Execute via prompts/backlog/dossier_task.md.
+task_sync_key: lane:data-exchange/type:dossier
+
+Source of truth: `notes/maps/lanes.md`.
+
+Execute via `prompts/backlog/dossier_task.md`.
 
 Primary artifact:
-- notes/dossiers/lane-data-exchange.md
-
-Inputs:
-- Entry packages from notes/maps/lanes.md
-- Results from the map task task-9.1
-
-Optional:
-- If you need a runnable repro, put it under tools/repros/lane-data-exchange/.
+- `notes/dossiers/lane-data-exchange.md`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Acceptance Criteria
@@ -49,5 +45,5 @@ Optional:
 <!-- SECTION:NOTES:BEGIN -->
 - Wrote `notes/dossiers/lane-data-exchange.md` from `notes/dossiers/_template.md` using `notes/maps/lane-data-exchange.md`.
 - Evidence: `occt/src/XSControl/XSControl_Reader.hxx` (work session + selection/transfer workflow; shape processing parameters/flags), `occt/src/STEPControl/STEPControl_Reader.hxx` + `occt/src/IGESControl/IGESControl_Reader.hxx` (format-specific readers + default healing hooks), `occt/src/Transfer/Transfer_TransientProcess.hxx` (model/graph/context + trace/check helpers), `occt/src/IFSelect/IFSelect_SessionPilot.hxx` (command-driven session automation).
-- Optional repro deferred; can add `tools/repros/lane-data-exchange/` later.
+- Optional repro deferred; can add `repros/lane-data-exchange/` later.
 <!-- SECTION:NOTES:END -->

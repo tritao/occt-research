@@ -1,22 +1,28 @@
 ---
 id: task-3
 title: 'Lane: core-kernel'
-status: Done
-assignee: []
+status: In Progress
+assignee:
 created_date: '2026-01-14 23:59'
-updated_date: '2026-01-15 00:46'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:core-kernel'
   - 'type:lane'
-dependencies: []
+dependencies:
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Source of truth: notes/maps/lanes.md.
+task_sync_key: lane:core-kernel/type:lane
 
-This is a parent task grouping the lane's map + dossier tasks.
+Source of truth: `notes/maps/lanes.md`.
+
+This is a parent lane task grouping map/dossier/repro tasks.
+
+Expected artifacts:
+- `notes/maps/lane-core-kernel.md`
+- `notes/dossiers/lane-core-kernel.md`
+- `repros/lane-core-kernel/README.md`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Implementation Notes

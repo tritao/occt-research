@@ -2,21 +2,27 @@
 id: task-5
 title: 'Lane: brep-geometry-bridge'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 00:46'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:brep-geometry-bridge'
   - 'type:lane'
-dependencies: []
+dependencies:
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Source of truth: notes/maps/lanes.md.
+task_sync_key: lane:brep-geometry-bridge/type:lane
 
-This is a parent task grouping the lane's map + dossier tasks.
+Source of truth: `notes/maps/lanes.md`.
+
+This is a parent lane task grouping map/dossier/repro tasks.
+
+Expected artifacts:
+- `notes/maps/lane-brep-geometry-bridge.md`
+- `notes/dossiers/lane-brep-geometry-bridge.md`
+- `repros/lane-brep-geometry-bridge/README.md`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Implementation Notes

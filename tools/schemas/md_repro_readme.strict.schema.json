@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "md_repro_readme.strict.schema.json",
+  "title": "Repro README markdown (extracted, strict)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "path", "title", "headings"],
+  "properties": {
+    "kind": { "const": "repro-readme" },
+    "path": { "type": "string" },
+    "title": { "type": "string", "minLength": 1 },
+    "headings": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "allOf": [
+    { "properties": { "path": { "pattern": "^repros/.+/README\\.md$" } } },
+    { "properties": { "headings": { "contains": { "pattern": "^# Repro:" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Goal" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Preconditions" } } } },
+    { "properties": { "headings": { "contains": { "const": "## How to run (OCCT oracle)" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Outputs" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Scenarios covered / not covered" } } } }
+  ]
+}

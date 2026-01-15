@@ -54,7 +54,7 @@ Capture OCCT’s B-Rep tessellation (“meshing”) entry points, parameterizati
 
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `tools/repros/lane-meshing/` if/when needed).
+Not created for this dossier (can be added under `repros/lane-meshing/` if/when needed).
 
 ## Compare to papers / alternatives
 

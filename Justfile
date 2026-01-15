@@ -46,7 +46,7 @@ deps:
 	@echo "System deps installed."
 
 local-dirs:
-	mkdir -p "{{BIN}}" "{{CACHE}}" "{{MAPS_DIR}}" "{{ROOT}}/notes/dossiers" "{{ROOT}}/oracles"
+	mkdir -p "{{BIN}}" "{{CACHE}}" "{{MAPS_DIR}}" "{{ROOT}}/notes/dossiers" "{{ROOT}}/repros" "{{ROOT}}/oracles"
 	@echo "Local dirs ready: {{LOCAL}}"
 
 # --- Node tools: Backlog.md + Codex CLI ------------------------------------
@@ -80,6 +80,30 @@ clangd-index:
 
 maps:
 	./tools/gen_maps.sh "{{OCCT_DIR}}" "{{BUILD_DIR}}" "{{MAPS_DIR}}"
+
+validate-md:
+	python3 ./tools/validate_md_types.py --root . --level baseline
+
+validate-md-strict:
+	python3 ./tools/validate_md_types.py --root . --level strict
+
+overview:
+	python3 ./tools/gen_overview_pages.py --root .
+
+schema-seed:
+	python3 ./tools/seed_schema_migration_tasks.py --level strict
+
+backlog-sync:
+	python3 ./tools/backlog_sync.py
+
+backlog-sync-dry:
+	python3 ./tools/backlog_sync.py --dry-run
+
+sync:
+	just validate-md
+	just overview
+	just schema-seed
+	just backlog-sync
 
 # --- Backlog ----------------------------------------------------------------
 

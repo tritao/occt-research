@@ -52,7 +52,7 @@ Capture OCCT’s “data exchange” stack at the level where a file becomes a `
 
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `tools/repros/lane-data-exchange/` if/when needed).
+Not created for this dossier (can be added under `repros/lane-data-exchange/` if/when needed).
 
 ## Compare to papers / alternatives
 

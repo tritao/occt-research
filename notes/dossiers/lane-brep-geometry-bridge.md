@@ -55,7 +55,7 @@ Explain how OCCT bridges *topology* (`TopoDS_*`) to *geometry* (`Geom*`, `gp*`) 
 
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `tools/repros/lane-brep-geometry-bridge/` if/when needed).
+Not created for this dossier (can be added under `repros/lane-brep-geometry-bridge/` if/when needed).
 
 ## Compare to papers / alternatives
 

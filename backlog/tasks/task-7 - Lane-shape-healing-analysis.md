@@ -1,22 +1,28 @@
 ---
 id: task-7
 title: 'Lane: shape-healing-analysis'
-status: Done
-assignee: []
+status: In Progress
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 00:46'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:shape-healing-analysis'
   - 'type:lane'
-dependencies: []
+dependencies:
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Source of truth: notes/maps/lanes.md.
+task_sync_key: lane:shape-healing-analysis/type:lane
 
-This is a parent task grouping the lane's map + dossier tasks.
+Source of truth: `notes/maps/lanes.md`.
+
+This is a parent lane task grouping map/dossier/repro tasks.
+
+Expected artifacts:
+- `notes/maps/lane-shape-healing-analysis.md`
+- `notes/dossiers/lane-shape-healing-analysis.md`
+- `repros/lane-shape-healing-analysis/README.md`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Implementation Notes

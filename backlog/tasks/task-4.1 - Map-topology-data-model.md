@@ -2,26 +2,26 @@
 id: task-4.1
 title: 'Map: topology-data-model'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 00:13'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:topology-data-model'
   - 'type:map'
-dependencies: []
+dependencies:
 parent_task_id: task-4
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Execute via prompts/backlog/map_task.md.
+task_sync_key: lane:topology-data-model/type:map
+
+Source of truth: `notes/maps/lanes.md`.
+
+Execute via `prompts/backlog/map_task.md`.
 
 Primary artifact:
-- notes/maps/lane-topology-data-model.md (lane-specific map + findings)
-
-Inputs:
-- Lane definition and entry packages in notes/maps/lanes.md.
+- `notes/maps/lane-topology-data-model.md`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Acceptance Criteria

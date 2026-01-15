@@ -54,7 +54,7 @@ Capture OCCT’s interactive visualization stack at the abstraction boundaries a
 
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `tools/repros/lane-visualization/` if/when needed).
+Not created for this dossier (can be added under `repros/lane-visualization/` if/when needed).
 
 ## Compare to papers / alternatives
 

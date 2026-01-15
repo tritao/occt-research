@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
-REPRO_DIR="$ROOT/tools/repros/lane-brep-geometry-bridge"
+REPRO_DIR="$ROOT/repros/lane-brep-geometry-bridge"
 
 # build-occt/env.sh assumes unset variables may be referenced; avoid nounset failures.
 set +u

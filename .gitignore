@@ -8,7 +8,7 @@ build-occt/
 compile_commands.json
 
 # repro build outputs
-tools/repros/**/build/
+repros/**/build/
 
 # generated maps (keep .md/.json if you want to commit them)
 notes/maps/*.dot

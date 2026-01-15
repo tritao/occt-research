@@ -2,9 +2,9 @@
 id: task-4.2
 title: 'Dossier: topology-data-model'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 00:16'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:topology-data-model'
   - 'type:dossier'
@@ -12,21 +12,17 @@ dependencies:
   - task-4.1
 parent_task_id: task-4
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Execute via prompts/backlog/dossier_task.md.
+task_sync_key: lane:topology-data-model/type:dossier
+
+Source of truth: `notes/maps/lanes.md`.
+
+Execute via `prompts/backlog/dossier_task.md`.
 
 Primary artifact:
-- notes/dossiers/lane-topology-data-model.md
-
-Inputs:
-- Entry packages from notes/maps/lanes.md
-- Results from the map task task-4.1
-
-Optional:
-- If you need a runnable repro, put it under tools/repros/lane-topology-data-model/.
+- `notes/dossiers/lane-topology-data-model.md`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Acceptance Criteria
@@ -49,5 +45,5 @@ Optional:
 <!-- SECTION:NOTES:BEGIN -->
 - Wrote `notes/dossiers/lane-topology-data-model.md` from `notes/dossiers/_template.md` using lane map `notes/maps/lane-topology-data-model.md`.
 - Evidence sources: `occt/src/TopoDS/TopoDS_Shape.hxx` (identity tiers + transform validation + hash), `occt/src/TopoDS/TopoDS_TShape.hxx` (flags + children), `occt/src/TopLoc/TopLoc_Location.{hxx,cxx,lxx}` (composition, inversion, hashing), `occt/src/TopAbs/*` (orientation + kind vocab), `occt/src/TopTools/*` (shape map hasher).
-- No repro yet; add under `tools/repros/lane-topology-data-model/` if needed.
+- No repro yet; add under `repros/lane-topology-data-model/` if needed.
 <!-- SECTION:NOTES:END -->

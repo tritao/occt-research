@@ -2,9 +2,9 @@
 id: task-5.2
 title: 'Dossier: brep-geometry-bridge'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 00:35'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:brep-geometry-bridge'
   - 'type:dossier'
@@ -12,21 +12,17 @@ dependencies:
   - task-5.1
 parent_task_id: task-5
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Execute via prompts/backlog/dossier_task.md.
+task_sync_key: lane:brep-geometry-bridge/type:dossier
+
+Source of truth: `notes/maps/lanes.md`.
+
+Execute via `prompts/backlog/dossier_task.md`.
 
 Primary artifact:
-- notes/dossiers/lane-brep-geometry-bridge.md
-
-Inputs:
-- Entry packages from notes/maps/lanes.md
-- Results from the map task task-5.1
-
-Optional:
-- If you need a runnable repro, put it under tools/repros/lane-brep-geometry-bridge/.
+- `notes/dossiers/lane-brep-geometry-bridge.md`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Acceptance Criteria

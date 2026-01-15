@@ -53,7 +53,7 @@ Capture OCCT’s Boolean Operations (“BOP”) subsystem at a practical level: 
 
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `tools/repros/lane-booleans/` if/when needed).
+Not created for this dossier (can be added under `repros/lane-booleans/` if/when needed).
 
 ## Compare to papers / alternatives
 

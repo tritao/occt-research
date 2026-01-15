@@ -2,9 +2,9 @@
 id: task-10.2
 title: 'Dossier: visualization'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 00:46'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:visualization'
   - 'type:dossier'
@@ -12,21 +12,17 @@ dependencies:
   - task-10.1
 parent_task_id: task-10
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Execute via prompts/backlog/dossier_task.md.
+task_sync_key: lane:visualization/type:dossier
+
+Source of truth: `notes/maps/lanes.md`.
+
+Execute via `prompts/backlog/dossier_task.md`.
 
 Primary artifact:
-- notes/dossiers/lane-visualization.md
-
-Inputs:
-- Entry packages from notes/maps/lanes.md
-- Results from the map task task-10.1
-
-Optional:
-- If you need a runnable repro, put it under tools/repros/lane-visualization/.
+- `notes/dossiers/lane-visualization.md`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Acceptance Criteria
@@ -49,5 +45,5 @@ Optional:
 <!-- SECTION:NOTES:BEGIN -->
 - Wrote `notes/dossiers/lane-visualization.md` from `notes/dossiers/_template.md` using `notes/maps/lane-visualization.md`.
 - Evidence: `occt/src/AIS/AIS_InteractiveContext.hxx` (context-driven modification + selection/highlighting styles), `occt/src/AIS/AIS_Shape.hxx` (shape interactive object + selection mode mapping), `occt/src/V3d/V3d_Viewer.hxx` + `occt/src/V3d/V3d_View.hxx` (viewer/view lifecycle + redraw + Z layers), `occt/src/Graphic3d/Graphic3d_GraphicDriver.hxx` (backend driver abstraction), `occt/src/OpenGl/OpenGl_GraphicDriver.hxx` (OpenGL backend + context init + VBO/vsync).
-- Optional repro deferred; can add `tools/repros/lane-visualization/` later.
+- Optional repro deferred; can add `repros/lane-visualization/` later.
 <!-- SECTION:NOTES:END -->

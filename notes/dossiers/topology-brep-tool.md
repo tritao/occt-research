@@ -45,8 +45,8 @@ Capture how OCCT represents topology (`TopoDS_Shape`/`TopoDS_TShape`) and how `B
 
 ## Runnable repro (optional)
 
-One minimal runnable reproduction (if needed) under `tools/repros/`:
-- Path: `tools/repros/topology-brep-tool/README.md` (not created)
+One minimal runnable reproduction (if needed) under `repros/`:
+- Path: `repros/topology-brep-tool/README.md` (not created)
 - How to run: N/A
 - Expected output: N/A
 

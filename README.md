@@ -47,8 +47,9 @@ just clangd-index
 - `build-occt/` (CMake build dir with `compile_commands.json`)
 - `.local/` (local tool installs; add via `source env.sh`)
 - `notes/maps/` (graphs + summaries)
+- `notes/maps/provenance.md` (OCCT version + build/tool provenance for generated maps)
 - `notes/dossiers/` (your algorithm writeups)
-- `tools/repros/` (runnable repro scripts and READMEs)
+- `repros/` (runnable repro scripts and READMEs)
 
 ## How to use Codex productively (recommended prompt protocol)
 

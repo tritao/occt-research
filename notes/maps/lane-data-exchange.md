@@ -46,6 +46,10 @@ Heavy “RW* -> schema” edges dominate (read/write toolkits referencing STEP/I
 Session/selection layer also shows strong coupling:
 - `IFSelect` -> `Interface`: 201
 
+## Local dependency shape (what these packages depend on)
+
+TODO: Fill from `notes/maps/include_graph.exchange_vis.dot` (largest direct edges originating in lane packages), similar to other lane maps.
+
 ## Suggested dossier entry points (next task)
 
 If writing `task-9.2` (dossier), start from:

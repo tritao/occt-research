@@ -56,7 +56,7 @@ Capture the “shape healing” toolkit that sits between raw/topologically-vali
 
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `tools/repros/lane-shape-healing-analysis/` if/when needed).
+Not created for this dossier (can be added under `repros/lane-shape-healing-analysis/` if/when needed).
 
 ## Compare to papers / alternatives
 

@@ -13,12 +13,12 @@ Exercise the “topology ↔ geometry bridge” APIs in OCCT: edge 3D curve vs p
 From repo root:
 
 - `just occt-build`
-- `bash tools/repros/lane-brep-geometry-bridge/run.sh`
+- `bash repros/lane-brep-geometry-bridge/run.sh`
 
 ## Outputs
 
 - Output files:
-  - `tools/repros/lane-brep-geometry-bridge/golden/bridge.json`
+  - `repros/lane-brep-geometry-bridge/golden/bridge.json`
 - Match criteria:
   - exact: all strings, bools, integers (counts), and enum-like fields
   - tolerant: all floating-point fields (points/UV/parameters/distances), compare within `eps = 1e-9`
@@ -34,4 +34,3 @@ From repo root:
   - seam edges / closed surfaces (two pcurves for one edge)
   - non-planar surfaces (e.g., cylinder) and pcurve parameterization subtleties
   - polygon-on-triangulation per-edge outputs on curved faces
-

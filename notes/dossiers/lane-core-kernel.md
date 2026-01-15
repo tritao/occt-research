@@ -67,7 +67,7 @@ Capture the “core kernel” layer of OCCT: foundational runtime conventions (`
 
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `tools/repros/lane-core-kernel/` if/when needed).
+Not created for this dossier (can be added under `repros/lane-core-kernel/` if/when needed).
 
 ## Compare to papers / alternatives
 

@@ -2,26 +2,26 @@
 id: task-7.1
 title: 'Map: shape-healing-analysis'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 00:24'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:shape-healing-analysis'
   - 'type:map'
-dependencies: []
+dependencies:
 parent_task_id: task-7
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
-Execute via prompts/backlog/map_task.md.
+task_sync_key: lane:shape-healing-analysis/type:map
+
+Source of truth: `notes/maps/lanes.md`.
+
+Execute via `prompts/backlog/map_task.md`.
 
 Primary artifact:
-- notes/maps/lane-shape-healing-analysis.md (lane-specific map + findings)
-
-Inputs:
-- Lane definition and entry packages in notes/maps/lanes.md.
+- `notes/maps/lane-shape-healing-analysis.md`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Acceptance Criteria

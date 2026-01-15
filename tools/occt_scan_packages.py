@@ -13,10 +13,16 @@ def main():
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
+    repo_root = Path.cwd().resolve()
     occt = Path(args.occt).resolve()
     src = occt / "src"
     out_dir = Path(args.out).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    try:
+        occt_label = str(occt.relative_to(repo_root))
+    except ValueError:
+        occt_label = str(occt)
 
     packages = {}
     header_to_pkg = {}
@@ -52,7 +58,7 @@ def main():
             }
 
     data = {
-        "occt_root": str(occt),
+        "occt_root": occt_label,
         "n_packages": len(packages),
         "packages": packages,
         "header_to_pkg": header_to_pkg,
@@ -61,7 +67,7 @@ def main():
     (out_dir / "packages.json").write_text(json.dumps(data, indent=2))
 
     # human summary
-    lines = ["# OCCT package scan", f"- root: `{occt}`", f"- packages: **{len(packages)}**", ""]
+    lines = ["# OCCT package scan", f"- root: `{occt_label}`", f"- packages: **{len(packages)}**", ""]
     top = sorted(packages.items(), key=lambda kv: kv[1]["n_sources"], reverse=True)[:60]
     lines.append("## Top packages by source files")
     for pkg, info in top:

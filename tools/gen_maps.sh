@@ -8,6 +8,9 @@ OUT_DIR="${3:?usage: gen_maps.sh <occt_dir> <build_dir> <out_dir>}"
 
 mkdir -p "$OUT_DIR"
 
+echo "[maps] 0) provenance"
+bash ./tools/write_provenance.sh "$OCCT_DIR" "$BUILD_DIR" "$OUT_DIR"
+
 echo "[maps] 1) package scan"
 python3 ./tools/occt_scan_packages.py --occt "$OCCT_DIR" --out "$OUT_DIR"
 

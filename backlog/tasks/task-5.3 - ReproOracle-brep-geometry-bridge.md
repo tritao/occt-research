@@ -2,9 +2,9 @@
 id: task-5.3
 title: 'Repro+Oracle: brep-geometry-bridge'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 01:00'
-updated_date: '2026-01-15 01:45'
+updated_date: '2026-01-15 01:54:26'
 labels:
   - 'lane:brep-geometry-bridge'
   - 'type:oracle'
@@ -13,7 +13,6 @@ dependencies:
   - task-5.2
 parent_task_id: task-5
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->
@@ -24,14 +23,14 @@ Source of truth: `notes/maps/lanes.md`.
 Execute via `prompts/backlog/repro_oracle_task.md`.
 
 Primary artifacts:
-- `tools/repros/lane-brep-geometry-bridge/README.md`
-- `tools/repros/lane-brep-geometry-bridge/golden/`
+- `repros/lane-brep-geometry-bridge/README.md`
+- `repros/lane-brep-geometry-bridge/golden/`
 <!-- SECTION:DESCRIPTION:END -->
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [x] #1 Repro README exists under tools/repros/lane-brep-geometry-bridge/
-- [x] #2 Oracle outputs exist under tools/repros/lane-brep-geometry-bridge/golden/
+- [x] #1 Repro README exists under repros/lane-brep-geometry-bridge/
+- [x] #2 Oracle outputs exist under repros/lane-brep-geometry-bridge/golden/
 - [x] #3 Match criteria documented (exact vs tolerant)
 <!-- AC:END -->
 
@@ -40,17 +39,17 @@ Primary artifacts:
 <!-- SECTION:PLAN:BEGIN -->
 1) Define oracle outputs (JSON schema) covering: edge 3D curve vs pcurve, surface type/params, location effects, triangulation stats, and tolerances.
 2) Ensure OCCT is built locally (run `just occt-build` if needed) so we can link against `TKBRep`/`TKGeomBase` etc.
-3) Implement a minimal C++ repro under `tools/repros/lane-brep-geometry-bridge/` that constructs a small face+edge scenario, queries BRep/Geom bridge APIs, runs meshing, and emits deterministic JSON.
-4) Save oracle output(s) under `tools/repros/lane-brep-geometry-bridge/golden/` and document match criteria (exact vs tolerant) in the README.
+3) Implement a minimal C++ repro under `repros/lane-brep-geometry-bridge/` that constructs a small face+edge scenario, queries BRep/Geom bridge APIs, runs meshing, and emits deterministic JSON.
+4) Save oracle output(s) under `repros/lane-brep-geometry-bridge/golden/` and document match criteria (exact vs tolerant) in the README.
 5) Summarize coverage + next extension in task notes and mark Done.
 <!-- SECTION:PLAN:END -->
 
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-- Added runnable repro under `tools/repros/lane-brep-geometry-bridge/`.
-- Oracle output: `tools/repros/lane-brep-geometry-bridge/golden/bridge.json` (includes OCCT version, edge curve3d/pcurve types+ranges, surface type, tolerances/flags, location effects, and triangulation stats).
-- How to run: `just occt-build` then `bash tools/repros/lane-brep-geometry-bridge/run.sh`.
+- Added runnable repro under `repros/lane-brep-geometry-bridge/`.
+- Oracle output: `repros/lane-brep-geometry-bridge/golden/bridge.json` (includes OCCT version, edge curve3d/pcurve types+ranges, surface type, tolerances/flags, location effects, and triangulation stats).
+- How to run: `just occt-build` then `bash repros/lane-brep-geometry-bridge/run.sh`.
 - Match criteria: exact for non-floats; floats within `eps=1e-9` (documented in the repro README).
 - Not covered yet: seam/closed-surface edges with two pcurves, non-planar surfaces (cylinder), and deeper polygon-on-triangulation details.
 <!-- SECTION:NOTES:END -->

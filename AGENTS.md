@@ -8,4 +8,4 @@
 - Workflow scaffolding may be edited in:
   - `./prompts` (prompt templates)
   - `./backlog` (Backlog.md config/tasks)
-- Avoid creating new files under `./oracles` (prefer `./tools/repros/...`).
+- Avoid creating new files under `./oracles` (prefer `./repros/...`).
