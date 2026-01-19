@@ -96,6 +96,9 @@ validate-md:
 validate-md-strict:
 	{{PY}} ./tools/validate_md_types.py --root . --level strict
 
+docs-lint:
+	{{PY}} ./tools/lint_walkthrough_cases.py --root .
+
 overview:
 	{{PY}} ./tools/gen_overview_pages.py --root .
 

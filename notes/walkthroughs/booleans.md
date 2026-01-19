@@ -2,21 +2,13 @@
 
 This walkthrough is meant to make OCCT booleans feel like a debuggable pipeline rather than a black box.
 
+Repro + oracle: `notes/walkthroughs/booleans-cases.md`.
+
 ## What you should learn
 
 - What the boolean “pipeline” phases are (intersect/split → build).
 - What to look at first when a boolean fails (errors/warnings vs invalid results).
 - How to interpret the lane repro oracle (`booleans.json`) as a health check.
-
-## Run the repro
-
-From repo root:
-
-- `just occt-build`
-- `bash repros/lane-booleans/run.sh`
-
-Oracle output:
-- `repros/lane-booleans/golden/booleans.json`
 
 ## Read the oracle output (step-by-step)
 

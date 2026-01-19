@@ -2,13 +2,7 @@
 
 This walkthrough is a practical “how to read the kernel rules” guide using the existing repro.
 
-## Run the repro
-
-- `just occt-build`
-- `bash repros/lane-core-kernel/run.sh`
-
-Oracle output:
-- `repros/lane-core-kernel/golden/core-kernel.json`
+Repro + oracle: `notes/walkthroughs/core-kernel-cases.md`.
 
 ## What to look at
 
@@ -17,4 +11,3 @@ Oracle output:
 - `handles.*`: refcount behavior for handle-managed objects (`Standard_Transient` + `opencascade::handle<T>`).
 
 Next: connect these tolerances to booleans/meshing guardrails (`notes/walkthroughs/booleans.md`, `notes/walkthroughs/meshing.md`).
-

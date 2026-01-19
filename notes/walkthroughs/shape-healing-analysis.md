@@ -2,13 +2,7 @@
 
 This walkthrough shows what “healing” looks like mechanically: detect a defect, apply a fix, and observe tolerance changes.
 
-## Run the repro
-
-- `just occt-build`
-- `bash repros/lane-shape-healing-analysis/run.sh`
-
-Oracle output:
-- `repros/lane-shape-healing-analysis/golden/shape-healing.json`
+Repro + oracle: `notes/walkthroughs/shape-healing-analysis-cases.md`.
 
 ## What to look at
 
@@ -16,4 +10,3 @@ Oracle output:
 - `before.topo_closed` → `after.topo_closed` (topological closure)
 - `after.v_first_tolerance` / `after.v_last_tolerance` (what tolerances changed to make it “work”?)
 - `fix.status_*` (DONE/FAIL/OK flags)
-

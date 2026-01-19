@@ -8,15 +8,7 @@ This walkthrough makes the “multiple representations” model concrete: a topo
 - Why “location” is part of almost every answer (`TopLoc_Location` composition).
 - How to sanity-check that a pcurve + surface really matches the 3D edge.
 
-## Run the repro
-
-From repo root:
-
-- `just occt-build`
-- `bash repros/lane-brep-geometry-bridge/run.sh`
-
-Oracle output:
-- `repros/lane-brep-geometry-bridge/golden/bridge.json`
+Repro + oracle: `notes/walkthroughs/brep-geometry-bridge-cases.md`.
 
 ## Read the oracle output (step-by-step)
 
