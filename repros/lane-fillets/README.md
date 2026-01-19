@@ -35,8 +35,9 @@ From repo root:
   - constant-radius fillet on a box edge (single edge)
   - 3-edge corner fillet attempt (edges meeting at one vertex)
   - failure example where radius is too large
+- Added:
+  - variable-radius fillet (linear `R1 -> R2` along the spine)
+  - symmetric chamfer on a box edge and on a 3-edge corner
 - Not covered (next extension):
   - variable-radius laws (`Law_Function`, `UandR`) and per-edge radius bounds
-  - chamfers (`BRepFilletAPI_MakeChamfer`)
   - non-manifold/wire-edge fillets, and filleting after booleans/healing
-
