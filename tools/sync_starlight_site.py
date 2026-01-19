@@ -88,6 +88,7 @@ def copy_file(src: Path, dst: Path, *, tmp_root: Path, src_rel: str) -> None:
     if src_rel.startswith("maps/hub-"):
         # Hubs are generated index pages; keep the “meat” and drop redundant artifact pointers.
         text = strip_section(text, "## Artifacts")
+        text = strip_section(text, "## Backlog")
 
     if not text.startswith("---\n"):
         title = None
