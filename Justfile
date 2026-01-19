@@ -99,6 +99,9 @@ validate-md-strict:
 overview:
 	{{PY}} ./tools/gen_overview_pages.py --root .
 
+algo-report lane title="":
+	{{PY}} ./tools/gen_algorithm_report.py --root . --lane "{{lane}}" --title "{{title}}"
+
 schema-seed:
 	{{PY}} ./tools/seed_schema_migration_tasks.py --level strict
 
