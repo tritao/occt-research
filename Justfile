@@ -115,6 +115,7 @@ backlog-sync-dry:
 	{{PY}} ./tools/backlog_sync.py --dry-run
 
 sync:
+	just docs-lint
 	just validate-md
 	just overview
 	just schema-seed
