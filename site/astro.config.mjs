@@ -68,6 +68,7 @@ export default defineConfig({
 								{ label: 'Hub', slug: 'occt/maps/hub-fillets' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-fillets' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-fillets' },
+								{ label: 'Algorithm (ChFi3d)', slug: 'occt/dossiers/algorithm-fillets-chfi3d' },
 								{ label: 'Walkthrough', slug: 'occt/walkthroughs/fillets' },
 								{ label: 'Repro', slug: 'occt/repros/lane-fillets/readme' },
 							],
