@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "occt_version": "7.9.3",
+    "occt_dev": ""
+  },
+  "inputs": {
+    "box": { "bbox": { "is_void": false, "min": [-9.9999999999999995e-08, -9.9999999999999995e-08, -9.9999999999999995e-08], "max": [10.000000099999999, 10.000000099999999, 10.000000099999999] }, "counts": { "solids": 1, "faces": 6, "edges": 12, "vertices": 8 } }
+  },
+  "cases": {
+    "single_edge_radius_1": {
+      "params": { "radius": 1 },
+      "selection": { "edges_added": 1 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": true,
+        "nb_contours": 1,
+        "nb_faulty_contours": 0,
+        "nb_faulty_vertices": 0,
+        "has_result": false,
+        "generated_faces_from_selected_edges": 1,
+        "contours": [
+          {"ic": 1, "nb_edges": 1, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok"}
+        ]
+      },
+      "result": {
+        "is_valid": true,
+        "counts": { "solids": 1, "faces": 7, "edges": 15, "vertices": 10 },
+        "bbox": { "is_void": false, "min": [-1.000000002220446e-07, -1.000000002220446e-07, -9.9999999999999995e-08], "max": [10.000000099999999, 10.000000099999999, 10.000000099999999] },
+        "surface_types": {"Geom_CylindricalSurface": 1, "Geom_Plane": 6}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      }
+    },
+    "corner_3_edges_radius_1": {
+      "params": { "radius": 1 },
+      "selection": { "edges_added": 3 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": true,
+        "nb_contours": 3,
+        "nb_faulty_contours": 0,
+        "nb_faulty_vertices": 0,
+        "has_result": false,
+        "generated_faces_from_selected_edges": 3,
+        "contours": [
+          {"ic": 1, "nb_edges": 1, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok"},
+          {"ic": 2, "nb_edges": 1, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok"},
+          {"ic": 3, "nb_edges": 1, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok"}
+        ]
+      },
+      "result": {
+        "is_valid": true,
+        "counts": { "solids": 1, "faces": 10, "edges": 22, "vertices": 13 },
+        "bbox": { "is_void": false, "min": [-1.000000002220446e-07, -1.000000002220446e-07, -1.000000002220446e-07], "max": [10.000000099999999, 10.000000099999999, 10.000000099999999] },
+        "surface_types": {"Geom_CylindricalSurface": 3, "Geom_Plane": 6, "Geom_SphericalSurface": 1}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      }
+    },
+    "single_edge_radius_100": {
+      "params": { "radius": 100 },
+      "selection": { "edges_added": 1 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": false,
+        "nb_contours": 1,
+        "nb_faulty_contours": 1,
+        "nb_faulty_vertices": 0,
+        "has_result": false,
+        "generated_faces_from_selected_edges": 0,
+        "contours": [
+          {"ic": 1, "nb_edges": 1, "stripe_status": 3, "stripe_status_name": "ChFiDS_StartsolFailure"}
+        ]
+      },
+      "result": {
+        "is_valid": false,
+        "counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bbox": { "is_void": true },
+        "surface_types": {}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      }
+    }
+  }
+}

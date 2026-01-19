@@ -24,24 +24,28 @@ Focus: boundary representation helpers that connect topology (TopoDS) to geometr
 ## Lane overview
 
 <!-- MANUAL:LANE_OVERVIEW:BEGIN -->
-- Boundary (in/out of scope): TODO
-- Canonical scenario: TODO
-- Observable outputs: TODO
-- Key invariants/tolerances to remember: TODO
+- Boundary (in/out of scope): reading/choosing geometric representations for topological entities (3D curve, pcurve on face, triangulation); excludes “doing modeling” (booleans/healing) beyond what’s needed to produce reps.
+- Canonical scenario: build a face, pick one edge, fetch its 3D curve and its pcurve on that face, and prove consistency by comparing a 3D point to `Surface.Value(U,V)` from the pcurve.
+- Observable outputs: whether a pcurve was stored vs synthesized; how returned `TopLoc_Location` composes; tolerance clamping to `Precision::Confusion()`.
+- Key invariants/tolerances to remember: representation priority (3D curve > pcurve > planar fallback); pcurves are face-relative; always apply returned locations.
 <!-- MANUAL:LANE_OVERVIEW:END -->
 
 ## 10k-ft spine
 
 5–10 symbols max, higher-level than the dossier spine:
 <!-- MANUAL:LANE_SPINE:BEGIN -->
-- TODO
+- `occt/src/BRep/BRep_Tool.hxx` — `BRep_Tool` (geometry/tolerance/mesh access)
+- `occt/src/BRep/BRep_Tool.cxx` — `BRep_Tool::CurveOnSurface` (pcurve selection + fallbacks)
+- `occt/src/BRepAdaptor/BRepAdaptor_Curve.hxx` — `BRepAdaptor_Curve` (edge-as-curve adapter)
+- `occt/src/BRepTools/BRepTools.hxx` — `BRepTools::UVBounds` (surface param bounds helpers)
+- `occt/src/BRepMesh/BRepMesh_IncrementalMesh.hxx` — `BRepMesh_IncrementalMesh` (produce triangulations)
 <!-- MANUAL:LANE_SPINE:END -->
 
 ## Backlog tasks
 
-- `task-11.11` (To Do) — Schema migrate (strict): notes/maps/lane-brep-geometry-bridge.md (`backlog/tasks/task-11.11 - Schema-migrate-notes-maps-lane-brep-geometry-bridge-md.md`)
-- `task-11.2` (To Do) — Schema migrate (strict): notes/dossiers/lane-brep-geometry-bridge.md (`backlog/tasks/task-11.2 - Schema-migrate-notes-dossiers-lane-brep-geometry-bridge-md.md`)
-- `task-5` (In Progress) — Lane: brep-geometry-bridge (`backlog/tasks/task-5 - Lane-brep-geometry-bridge.md`)
+- `task-11.11` (Done) — Schema migrate (strict): notes/maps/lane-brep-geometry-bridge.md (`backlog/tasks/task-11.11 - Schema-migrate-strict-notes-maps-lane-brep-geometry-bridge.md.md`)
+- `task-11.2` (Done) — Schema migrate (strict): notes/dossiers/lane-brep-geometry-bridge.md (`backlog/tasks/task-11.2 - Schema-migrate-strict-notes-dossiers-lane-brep-geometry-bridge.md.md`)
+- `task-5` (Done) — Lane: brep-geometry-bridge (`backlog/tasks/task-5 - Lane-brep-geometry-bridge.md`)
 - `task-5.1` (Done) — Map: brep-geometry-bridge (`backlog/tasks/task-5.1 - Map-brep-geometry-bridge.md`)
 - `task-5.2` (Done) — Dossier: brep-geometry-bridge (`backlog/tasks/task-5.2 - Dossier-brep-geometry-bridge.md`)
 - `task-5.3` (Done) — Repro+Oracle: brep-geometry-bridge (`backlog/tasks/task-5.3 - ReproOracle-brep-geometry-bridge.md`)

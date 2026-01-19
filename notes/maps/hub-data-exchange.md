@@ -8,7 +8,7 @@ Focus: STEP/IGES/XCAF import/export and translation layers.
 
 - Lane map: `notes/maps/lane-data-exchange.md`
 - Dossier: `notes/dossiers/lane-data-exchange.md`
-- Repro: `repros/lane-data-exchange/README.md` (missing)
+- Repro: `repros/lane-data-exchange/README.md`
 
 ## Entry packages
 
@@ -28,25 +28,29 @@ Focus: STEP/IGES/XCAF import/export and translation layers.
 ## Lane overview
 
 <!-- MANUAL:LANE_OVERVIEW:BEGIN -->
-- Boundary (in/out of scope): TODO
-- Canonical scenario: TODO
-- Observable outputs: TODO
-- Key invariants/tolerances to remember: TODO
+- Boundary (in/out of scope): file → interface model → transfer → `TopoDS_Shape`, with checks/traceability; excludes downstream healing/meshing except where the reader exposes hooks/flags.
+- Canonical scenario: read a small STEP file, `TransferRoots()`, then inspect return status, transfer checks, and units used during transfer.
+- Observable outputs: `IFSelect_ReturnStatus`; warning/fail messages; root/shape counts; unit system length settings.
+- Key invariants/tolerances to remember: readers are session/workflow oriented; shapes can accumulate across transfers unless cleared; unit handling and default healing policies are first-class.
 <!-- MANUAL:LANE_OVERVIEW:END -->
 
 ## 10k-ft spine
 
 5–10 symbols max, higher-level than the dossier spine:
 <!-- MANUAL:LANE_SPINE:BEGIN -->
-- TODO
+- `occt/src/STEPControl/STEPControl_Reader.hxx` — `STEPControl_Reader` (format façade)
+- `occt/src/IGESControl/IGESControl_Reader.hxx` — `IGESControl_Reader` (format façade)
+- `occt/src/XSControl/XSControl_Reader.hxx` — `XSControl_Reader` (session + selection + transfer orchestration)
+- `occt/src/Transfer/Transfer_TransientProcess.hxx` — `Transfer_TransientProcess` (checks/trace/context)
+- `occt/src/IFSelect/IFSelect_WorkSession.hxx` — `IFSelect_WorkSession` (stateful session backbone)
 <!-- MANUAL:LANE_SPINE:END -->
 
 ## Backlog tasks
 
-- `task-11.13` (To Do) — Schema migrate (strict): notes/maps/lane-data-exchange.md (`backlog/tasks/task-11.13 - Schema-migrate-notes-maps-lane-data-exchange-md.md`)
-- `task-11.4` (To Do) — Schema migrate (strict): notes/dossiers/lane-data-exchange.md (`backlog/tasks/task-11.4 - Schema-migrate-notes-dossiers-lane-data-exchange-md.md`)
-- `task-9` (In Progress) — Lane: data-exchange (`backlog/tasks/task-9 - Lane-data-exchange.md`)
+- `task-11.13` (Done) — Schema migrate (strict): notes/maps/lane-data-exchange.md (`backlog/tasks/task-11.13 - Schema-migrate-strict-notes-maps-lane-data-exchange.md.md`)
+- `task-11.4` (Done) — Schema migrate (strict): notes/dossiers/lane-data-exchange.md (`backlog/tasks/task-11.4 - Schema-migrate-strict-notes-dossiers-lane-data-exchange.md.md`)
+- `task-9` (Done) — Lane: data-exchange (`backlog/tasks/task-9 - Lane-data-exchange.md`)
 - `task-9.1` (Done) — Map: data-exchange (`backlog/tasks/task-9.1 - Map-data-exchange.md`)
 - `task-9.2` (Done) — Dossier: data-exchange (`backlog/tasks/task-9.2 - Dossier-data-exchange.md`)
-- `task-9.3` (To Do) — Repro+Oracle: data-exchange (`backlog/tasks/task-9.3 - Repro-data-exchange.md`)
+- `task-9.3` (Done) — Repro+Oracle: data-exchange (`backlog/tasks/task-9.3 - ReproOracle-data-exchange.md`)
 

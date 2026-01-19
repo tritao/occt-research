@@ -8,7 +8,7 @@ Focus: interactive visualization stack and rendering backends.
 
 - Lane map: `notes/maps/lane-visualization.md`
 - Dossier: `notes/dossiers/lane-visualization.md`
-- Repro: `repros/lane-visualization/README.md` (missing)
+- Repro: `repros/lane-visualization/README.md`
 
 ## Entry packages
 
@@ -27,25 +27,30 @@ Focus: interactive visualization stack and rendering backends.
 ## Lane overview
 
 <!-- MANUAL:LANE_OVERVIEW:BEGIN -->
-- Boundary (in/out of scope): TODO
-- Canonical scenario: TODO
-- Observable outputs: TODO
-- Key invariants/tolerances to remember: TODO
+- Boundary (in/out of scope): turning shapes into renderable/triangulated presentations and enabling interaction/selection; excludes meshing generation strategy (this lane consumes triangulations as needed) and modeling algorithms.
+- Canonical scenario: vary `Prs3d_Drawer` deflection settings and observe tessellation density (nodes/triangles) deterministically (no GUI).
+- Observable outputs: absolute vs relative deflection; effective deflection; whether tessellation was recomputed; node/triangle counts.
+- Key invariants/tolerances to remember: drawer settings control tessellation; relative deflection depends on shape size; AIS/context/view state controls interaction when you do use a GUI.
 <!-- MANUAL:LANE_OVERVIEW:END -->
 
 ## 10k-ft spine
 
 5–10 symbols max, higher-level than the dossier spine:
 <!-- MANUAL:LANE_SPINE:BEGIN -->
-- TODO
+- `occt/src/AIS/AIS_InteractiveContext.hxx` — `AIS_InteractiveContext` (display + selection state machine)
+- `occt/src/AIS/AIS_Shape.hxx` — `AIS_Shape` (TopoDS_Shape presentation)
+- `occt/src/V3d/V3d_Viewer.hxx` — `V3d_Viewer` (viewer owns views)
+- `occt/src/V3d/V3d_View.hxx` — `V3d_View` (camera + redraw)
+- `occt/src/Graphic3d/Graphic3d_GraphicDriver.hxx` — `Graphic3d_GraphicDriver` (driver abstraction)
+- `occt/src/OpenGl/OpenGl_GraphicDriver.hxx` — `OpenGl_GraphicDriver` (default backend)
 <!-- MANUAL:LANE_SPINE:END -->
 
 ## Backlog tasks
 
-- `task-10` (In Progress) — Lane: visualization (`backlog/tasks/task-10 - Lane-visualization.md`)
+- `task-10` (Done) — Lane: visualization (`backlog/tasks/task-10 - Lane-visualization.md`)
 - `task-10.1` (Done) — Map: visualization (`backlog/tasks/task-10.1 - Map-visualization.md`)
 - `task-10.2` (Done) — Dossier: visualization (`backlog/tasks/task-10.2 - Dossier-visualization.md`)
-- `task-10.3` (To Do) — Repro+Oracle: visualization (`backlog/tasks/task-10.3 - Repro-visualization.md`)
-- `task-11.17` (To Do) — Schema migrate (strict): notes/maps/lane-visualization.md (`backlog/tasks/task-11.17 - Schema-migrate-notes-maps-lane-visualization-md.md`)
-- `task-11.8` (To Do) — Schema migrate (strict): notes/dossiers/lane-visualization.md (`backlog/tasks/task-11.8 - Schema-migrate-notes-dossiers-lane-visualization-md.md`)
+- `task-10.3` (Done) — Repro+Oracle: visualization (`backlog/tasks/task-10.3 - ReproOracle-visualization.md`)
+- `task-11.17` (Done) — Schema migrate (strict): notes/maps/lane-visualization.md (`backlog/tasks/task-11.17 - Schema-migrate-strict-notes-maps-lane-visualization.md.md`)
+- `task-11.8` (Done) — Schema migrate (strict): notes/dossiers/lane-visualization.md (`backlog/tasks/task-11.8 - Schema-migrate-strict-notes-dossiers-lane-visualization.md.md`)
 

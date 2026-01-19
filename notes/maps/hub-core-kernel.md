@@ -8,7 +8,7 @@ Focus: foundational types, math, geometry primitives and curves/surfaces.
 
 - Lane map: `notes/maps/lane-core-kernel.md`
 - Dossier: `notes/dossiers/lane-core-kernel.md`
-- Repro: `repros/lane-core-kernel/README.md` (missing)
+- Repro: `repros/lane-core-kernel/README.md`
 
 ## Entry packages
 
@@ -27,25 +27,30 @@ Focus: foundational types, math, geometry primitives and curves/surfaces.
 ## Lane overview
 
 <!-- MANUAL:LANE_OVERVIEW:BEGIN -->
-- Boundary (in/out of scope): TODO
-- Canonical scenario: TODO
-- Observable outputs: TODO
-- Key invariants/tolerances to remember: TODO
+- Boundary (in/out of scope): runtime conventions, tolerance vocabulary, geometry primitives (`gp`) and parametric geometry (`Geom*`); excludes topology (`TopoDS*`) and modeling algorithms (booleans/fillets/etc.).
+- Canonical scenario: construct/evaluate a curve/surface, apply `gp_Trsf`, and compare results using `Precision::*` conventions.
+- Observable outputs: exception vs null-handle behavior; values of `gp::Resolution()`/`Precision::Confusion()`/`Precision::Angular()`; curve parameter ranges + continuity.
+- Key invariants/tolerances to remember: “confusion” is the default distance epsilon; “angular” is the default angle epsilon; many constructors guard against degeneracy using `gp::Resolution()`.
 <!-- MANUAL:LANE_OVERVIEW:END -->
 
 ## 10k-ft spine
 
 5–10 symbols max, higher-level than the dossier spine:
 <!-- MANUAL:LANE_SPINE:BEGIN -->
-- TODO
+- `occt/src/Standard/Standard_Transient.hxx` — `Standard_Transient` (handle-managed lifetime base)
+- `occt/src/Standard/Standard_Handle.hxx` — `opencascade::handle<T>` (refcount + deletion)
+- `occt/src/Precision/Precision.hxx` — `Precision::*` (kernel tolerance vocabulary)
+- `occt/src/gp/gp_Trsf.hxx` — `gp_Trsf` (transforms used everywhere)
+- `occt/src/Geom/Geom_Curve.hxx` — `Geom_Curve` (curve abstraction)
+- `occt/src/Geom/Geom_Surface.hxx` — `Geom_Surface` (surface abstraction)
 <!-- MANUAL:LANE_SPINE:END -->
 
 ## Backlog tasks
 
-- `task-11.12` (To Do) — Schema migrate (strict): notes/maps/lane-core-kernel.md (`backlog/tasks/task-11.12 - Schema-migrate-notes-maps-lane-core-kernel-md.md`)
-- `task-11.3` (To Do) — Schema migrate (strict): notes/dossiers/lane-core-kernel.md (`backlog/tasks/task-11.3 - Schema-migrate-notes-dossiers-lane-core-kernel-md.md`)
-- `task-3` (In Progress) — Lane: core-kernel (`backlog/tasks/task-3 - Lane-core-kernel.md`)
+- `task-11.12` (Done) — Schema migrate (strict): notes/maps/lane-core-kernel.md (`backlog/tasks/task-11.12 - Schema-migrate-strict-notes-maps-lane-core-kernel.md.md`)
+- `task-11.3` (Done) — Schema migrate (strict): notes/dossiers/lane-core-kernel.md (`backlog/tasks/task-11.3 - Schema-migrate-strict-notes-dossiers-lane-core-kernel.md.md`)
+- `task-3` (Done) — Lane: core-kernel (`backlog/tasks/task-3 - Lane-core-kernel.md`)
 - `task-3.1` (Done) — Map: core-kernel (`backlog/tasks/task-3.1 - Map-core-kernel.md`)
 - `task-3.2` (Done) — Dossier: core-kernel (`backlog/tasks/task-3.2 - Dossier-core-kernel.md`)
-- `task-3.3` (To Do) — Repro+Oracle: core-kernel (`backlog/tasks/task-3.3 - Repro-core-kernel.md`)
+- `task-3.3` (Done) — Repro+Oracle: core-kernel (`backlog/tasks/task-3.3 - ReproOracle-core-kernel.md`)
 

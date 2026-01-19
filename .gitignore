@@ -1,6 +1,7 @@
 # local tool installs / caches
 .local/
 .cache/
+.venv/
 
 # OCCT checkout + build
 occt/

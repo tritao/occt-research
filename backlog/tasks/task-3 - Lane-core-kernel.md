@@ -2,15 +2,14 @@
 id: task-3
 title: 'Lane: core-kernel'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-14 23:59'
-updated_date: '2026-01-15 13:24'
+updated_date: '2026-01-18 22:50:54'
 labels:
   - 'lane:core-kernel'
   - 'type:lane'
-dependencies: []
+dependencies:
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->

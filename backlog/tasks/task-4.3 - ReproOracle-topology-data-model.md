@@ -2,9 +2,9 @@
 id: task-4.3
 title: 'Repro+Oracle: topology-data-model'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 01:00'
-updated_date: '2026-01-15 08:11'
+updated_date: '2026-01-18 22:50:54'
 labels:
   - 'lane:topology-data-model'
   - 'type:oracle'
@@ -13,7 +13,6 @@ dependencies:
   - task-4.2
 parent_task_id: task-4
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->

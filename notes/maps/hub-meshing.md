@@ -8,7 +8,7 @@ Focus: triangulation and mesh generation.
 
 - Lane map: `notes/maps/lane-meshing.md`
 - Dossier: `notes/dossiers/lane-meshing.md`
-- Repro: `repros/lane-meshing/README.md` (missing)
+- Repro: `repros/lane-meshing/README.md`
 
 ## Entry packages
 
@@ -23,25 +23,29 @@ Focus: triangulation and mesh generation.
 ## Lane overview
 
 <!-- MANUAL:LANE_OVERVIEW:BEGIN -->
-- Boundary (in/out of scope): TODO
-- Canonical scenario: TODO
-- Observable outputs: TODO
-- Key invariants/tolerances to remember: TODO
+- Boundary (in/out of scope): generating triangulations/polygons as derived artifacts from B-Rep; excludes rendering (visualization lane) and most modeling edits.
+- Canonical scenario: mesh a simple face/solid with explicit `IMeshTools_Parameters` and inspect resulting `Poly_Triangulation` attached to faces.
+- Observable outputs: face node/triangle counts; mesher status; whether edge polygons-on-triangulation are present; parameter normalization outcomes.
+- Key invariants/tolerances to remember: deflection/angle are clamped against `Precision::*`; meshing is staged via `IMeshTools_Context` (build model → discretize edges → discretize faces).
 <!-- MANUAL:LANE_OVERVIEW:END -->
 
 ## 10k-ft spine
 
 5–10 symbols max, higher-level than the dossier spine:
 <!-- MANUAL:LANE_SPINE:BEGIN -->
-- TODO
+- `occt/src/BRepMesh/BRepMesh_IncrementalMesh.hxx` — `BRepMesh_IncrementalMesh::Perform` (entrypoint)
+- `occt/src/IMeshTools/IMeshTools_Parameters.hxx` — `IMeshTools_Parameters` (policy knobs)
+- `occt/src/IMeshTools/IMeshTools_Context.hxx` — `IMeshTools_Context` (phase orchestration)
+- `occt/src/IMeshData/IMeshData_Model.hxx` — `IMeshData_Model` (discrete model)
+- `occt/src/BRep/BRep_Tool.hxx` — `BRep_Tool::Triangulation` (retrieve attached mesh)
 <!-- MANUAL:LANE_SPINE:END -->
 
 ## Backlog tasks
 
-- `task-11.14` (To Do) — Schema migrate (strict): notes/maps/lane-meshing.md (`backlog/tasks/task-11.14 - Schema-migrate-notes-maps-lane-meshing-md.md`)
-- `task-11.5` (To Do) — Schema migrate (strict): notes/dossiers/lane-meshing.md (`backlog/tasks/task-11.5 - Schema-migrate-notes-dossiers-lane-meshing-md.md`)
-- `task-8` (In Progress) — Lane: meshing (`backlog/tasks/task-8 - Lane-meshing.md`)
+- `task-11.14` (Done) — Schema migrate (strict): notes/maps/lane-meshing.md (`backlog/tasks/task-11.14 - Schema-migrate-strict-notes-maps-lane-meshing.md.md`)
+- `task-11.5` (Done) — Schema migrate (strict): notes/dossiers/lane-meshing.md (`backlog/tasks/task-11.5 - Schema-migrate-strict-notes-dossiers-lane-meshing.md.md`)
+- `task-8` (Done) — Lane: meshing (`backlog/tasks/task-8 - Lane-meshing.md`)
 - `task-8.1` (Done) — Map: meshing (`backlog/tasks/task-8.1 - Map-meshing.md`)
 - `task-8.2` (Done) — Dossier: meshing (`backlog/tasks/task-8.2 - Dossier-meshing.md`)
-- `task-8.3` (To Do) — Repro+Oracle: meshing (`backlog/tasks/task-8.3 - Repro-meshing.md`)
+- `task-8.3` (Done) — Repro+Oracle: meshing (`backlog/tasks/task-8.3 - ReproOracle-meshing.md`)
 

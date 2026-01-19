@@ -4,7 +4,7 @@ title: 'Map: topology-data-model'
 status: Done
 assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 01:54:26'
+updated_date: '2026-01-18 22:50:54'
 labels:
   - 'lane:topology-data-model'
   - 'type:map'

@@ -10,6 +10,16 @@ Explain how OCCT bridges *topology* (`TopoDS_*`) to *geometry* (`Geom*`, `gp*`) 
 - **Construction**: consistent “builder API” shape result + subshape history (`BRepBuilderAPI_MakeShape`).
 - **Utilities**: post-processing/update, UV bounds, triangulation management (`BRepTools`).
 
+## Mental model (human-first)
+
+This lane is the “wiring harness” between the topological graph (edges/faces/wires) and the geometric objects that give them meaning (3D curves, surfaces, 2D pcurves). OCCT is intentionally flexible: the *same* edge may have multiple geometric representations available, and algorithms choose what they need.
+
+The key ideas to internalize:
+- A `TopoDS_Edge` can have **a 3D curve**, **a pcurve on a specific face**, and/or **a polygon on a triangulation** (discrete). These are not redundant; they serve different algorithmic needs.
+- Pcurves are **face-relative**: the same edge will generally have a different pcurve on each adjacent face.
+- Most getters return a geometry object *plus a location*; if you ignore the returned `TopLoc_Location`, you get the right type but the wrong placement.
+- If a representation is missing, OCCT often has a **fallback** (e.g. planar projection for planar faces). That fallback is convenient but can surprise you if you expect “missing means error”.
+
 ## Provenance (required)
 
 - OCCT version + build config: `notes/maps/provenance.md`
@@ -20,6 +30,23 @@ Explain how OCCT bridges *topology* (`TopoDS_*`) to *geometry* (`Geom*`, `gp*`) 
 - Scenario: build a planar face from a rectangular wire and query an edge’s 3D curve and its pcurve on that face.
 - Observable outputs: curve types/ranges; surface type; curve-vs-surface point distance via pcurve UV; triangulation stats after meshing.
 - Success criteria: distance is ~0 within epsilon; triangulation exists after meshing.
+
+## Walkthrough (repro-driven)
+
+1) Run: `bash repros/lane-brep-geometry-bridge/run.sh`
+2) Inspect the oracle output: `repros/lane-brep-geometry-bridge/golden/bridge.json`
+3) Use it to anchor the “multiple representations” idea:
+   - Edge representations:
+     - 3D curve: `edge.curve3d.type`, `edge.curve3d.first/last`, `edge.curve3d.mid_point_world`
+     - Pcurve on a face: `edge.pcurve.type`, `edge.pcurve.mid_uv`
+     - Consistency flags: `edge.same_parameter`, `edge.same_range`, `edge.tolerance`
+   - Face representation:
+     - `face.surface_type` (planar in this repro)
+     - `face.surface_mid_from_pcurve` and `face.curve_surface_mid_distance` (sanity check that pcurve+surface round-trips to the 3D edge)
+   - Location handling:
+     - `location_effect.move` vs `location_effect.surface_location` is the “don’t drop the location” reminder
+   - Triangulation as a derived rep:
+     - `triangulation.has_face_triangulation`, `triangulation.nb_nodes`, `triangulation.nb_triangles`
 
 ## Spine (call chain) (required)
 
@@ -69,11 +96,19 @@ Explain how OCCT bridges *topology* (`TopoDS_*`) to *geometry* (`Geom*`, `gp*`) 
   - `BRep_Tool::IsClosed(E,S,L)` early-outs `false` for planar surfaces and otherwise checks for a “curve on closed surface” representation; triangulation-based closure is checked via “polygon on closed triangulation”. (`occt/src/BRep/BRep_Tool.cxx` — `BRep_Tool::IsClosed`)
 - Null/exception paths:
   - `BRep_Tool::Pnt()` and `BRep_Tool::Tolerance(const TopoDS_Vertex&)` throw `Standard_NullObject` if the underlying `BRep_TVertex` is missing. (`occt/src/BRep/BRep_Tool.cxx`)
-  - `BRep_Tool::Parameter(const TopoDS_Vertex&, const TopoDS_Edge&)` throws `Standard_NoSuchObject` when no parameter can be found. (`occt/src/BRep/BRep_Tool.cxx` — `BRep_Tool::Parameter(V,E)`)
+- `BRep_Tool::Parameter(const TopoDS_Vertex&, const TopoDS_Edge&)` throws `Standard_NoSuchObject` when no parameter can be found. (`occt/src/BRep/BRep_Tool.cxx` — `BRep_Tool::Parameter(V,E)`)
+
+## Failure modes + diagnostics (recommended)
+
+- “Pcurve is missing”: `BRep_Tool::CurveOnSurface` can return `theIsStored=false` and synthesize a pcurve for planar faces; treat this as a signal that the model is under-specified, not necessarily a hard error.
+- “Geometry is correct but appears in the wrong place”: double-check you applied both `TopoDS_Shape` locations and the returned representation location (`E.Location() * curveRep.Location()` pattern).
+- “Distance isn’t ~0”: suspect a mismatch between 3D curve and pcurve parameterization (`SameParameter`/`SameRange` flags), or tolerance/precision issues on the edge/face.
 
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `repros/lane-brep-geometry-bridge/` if/when needed).
+- Path: `repros/lane-brep-geometry-bridge/README.md`
+- How to run: `repros/lane-brep-geometry-bridge/run.sh`
+- Oracle outputs: `repros/lane-brep-geometry-bridge/golden/bridge.json`
 
 ## Compare to papers / alternatives
 

@@ -2,15 +2,14 @@
 id: task-4
 title: 'Lane: topology-data-model'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 13:24'
+updated_date: '2026-01-18 22:50:54'
 labels:
   - 'lane:topology-data-model'
   - 'type:lane'
-dependencies: []
+dependencies:
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->

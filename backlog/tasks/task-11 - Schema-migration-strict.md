@@ -4,7 +4,7 @@ title: Schema migration (strict)
 status: Done
 assignee:
 created_date: '2026-01-15 01:29:54'
-updated_date: '2026-01-15 13:03:37'
+updated_date: '2026-01-18 22:32:18'
 labels:
   - 'schema-migration'
 dependencies:

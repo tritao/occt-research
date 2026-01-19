@@ -2,9 +2,9 @@
 id: task-8.3
 title: 'Repro+Oracle: meshing'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 01:00'
-updated_date: '2026-01-15 08:18'
+updated_date: '2026-01-18 22:50:54'
 labels:
   - 'lane:meshing'
   - 'type:oracle'
@@ -13,7 +13,6 @@ dependencies:
   - task-8.2
 parent_task_id: task-8
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->

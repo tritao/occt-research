@@ -6,6 +6,18 @@ Status: draft
 
 Capture the “core kernel” layer of OCCT: foundational runtime conventions (`Standard` handles/RTTI/exceptions), core containers (`NCollection`), basic geometric primitives and transforms (`gp`), analytic / spline geometry (`Geom`/`Geom2d`), and low-level numerical utilities (`math`). This is the substrate that most downstream modeling/booleans/meshing/exchange code builds on.
 
+## Mental model (human-first)
+
+This lane is “the rules of physics” for the rest of OCCT. If you understand how OCCT represents numbers, transforms, and geometry primitives here, the higher-level algorithms stop feeling magical: they are mostly orchestration plus a lot of careful tolerance handling.
+
+In practice, most modeling code is built out of:
+- **Lifetime + error conventions** (`Standard_Transient`, `opencascade::handle<T>`, OCCT exception types)
+- **Tolerance vocabulary** (`gp::Resolution()`, `Precision::*`) used everywhere to decide “equal enough”
+- **Value geometry primitives** (`gp_*`) for points/vectors/axes/transforms (cheap, non-persistent)
+- **Parametric geometry** (`Geom*`/`Geom2d*`) for curves/surfaces (persistent, handle-managed, often shared)
+
+When something looks “robust” (or “mysteriously fuzzy”) later, it’s usually because the code is consistently using the same kernel tolerances and guardrails defined here.
+
 ## Provenance (required)
 
 - OCCT version + build config: `notes/maps/provenance.md`
@@ -16,6 +28,17 @@ Capture the “core kernel” layer of OCCT: foundational runtime conventions (`
 - Scenario: exercise handle lifetime (`Standard_Transient`) and tolerance constants used throughout modeling.
 - Observable outputs: refcount behavior; exceptions on invalid construction; values of `Precision::*` and `gp::Resolution()`.
 - Success criteria: invariants described here match observed behavior and constants.
+
+## Walkthrough (repro-driven)
+
+1) Run: `bash repros/lane-core-kernel/run.sh`
+2) Inspect the oracle output: `repros/lane-core-kernel/golden/core-kernel.json`
+3) Map the output back to concepts in this lane:
+   - Tolerance vocabulary: `precision.confusion`, `precision.angular`, `precision.p_confusion`
+   - Baseline numeric “treat as zero”: `gp.resolution`
+   - Transform semantics: `gp.transform` shows a point transformed by a `gp_Trsf` (translation + rotation)
+   - Handle/refcount model: `handles.refcount_after_new`, `handles.refcount_after_copy`, `handles.refcount_after_nullify_copy`
+   - Container sanity: `ncollection.list.size` and `ncollection.list.sum`
 
 ## Spine (call chain) (required)
 
@@ -83,9 +106,17 @@ Capture the “core kernel” layer of OCCT: foundational runtime conventions (`
   - Derived tolerances like `Intersection()` = `Confusion()/100` and `Approximation()` = `Confusion()*10` encode “stricter for intersection, looser for approximation”.
 - `occt/src/NCollection/NCollection_List.hxx` — empty access throws `Standard_NoSuchObject` (fail-fast on misuse).
 
+## Failure modes + diagnostics (recommended)
+
+- “Everything is off by 1e-7”: check whether the code is using `Precision::Confusion()` vs a custom epsilon; this tolerance is the default “distance equality” across the kernel.
+- Unexpected exceptions in geometry construction (e.g. scaling): expect guardrails that treat near-zero as invalid; many setters raise `Standard_ConstructionError` when `Abs(value) <= gp::Resolution()`.
+- Refcount surprises: if `Standard_Transient::This()` raises or counts don’t match, suspect a non-handle-managed object or misuse of raw pointers instead of `opencascade::handle<T>`.
+
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `repros/lane-core-kernel/` if/when needed).
+- Path: `repros/lane-core-kernel/README.md`
+- How to run: `repros/lane-core-kernel/run.sh`
+- Oracle outputs: `repros/lane-core-kernel/golden/core-kernel.json`
 
 ## Compare to papers / alternatives
 

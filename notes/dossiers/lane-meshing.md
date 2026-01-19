@@ -6,6 +6,15 @@ Status: draft
 
 Capture OCCT’s B-Rep tessellation (“meshing”) entry points, parameterization, and discrete-model orchestration. This dossier focuses on how meshing is staged (model build → edge discretization → healing/pre/post processing → face discretization), what parameters mean at the API surface, and which tolerance/guardrails are enforced.
 
+## Mental model (human-first)
+
+Meshing in OCCT is a **derived artifact pipeline**: you start from an exact B-Rep (`TopoDS_Shape`) and produce a `Poly_Triangulation` attached back onto faces/edges. The important consequence is that meshing is not “just triangles”; it must respect:
+- the topology graph (shared edges, face boundaries)
+- the parametric geometry (surface UV space and curve parameterization)
+- the same tolerance conventions used by modeling algorithms
+
+Practically, you control meshing by choosing a deflection/angle policy, and OCCT orchestrates the phases via an `IMeshTools_Context`. When debugging, look for: parameter normalization (clamps/defaults), which phase fails (build model vs discretize edges vs discretize faces), and whether old triangulation/polygons are being cleaned and replaced.
+
 ## Provenance (required)
 
 - OCCT version + build config: `notes/maps/provenance.md`
@@ -16,6 +25,18 @@ Capture OCCT’s B-Rep tessellation (“meshing”) entry points, parameterizati
 - Scenario: mesh a simple planar face using explicit `IMeshTools_Parameters`.
 - Observable outputs: mesher status flags; face triangulation node/triangle counts; presence of edge polygons on triangulation.
 - Success criteria: meshing succeeds without exception; triangulation exists and counts are stable for the scenario.
+
+## Walkthrough (repro-driven)
+
+1) Run: `bash repros/lane-meshing/run.sh`
+2) Inspect the oracle output: `repros/lane-meshing/golden/meshing.json`
+3) Interpret the output as “how sensitive is the discretization?”:
+   - Each shape (`shapes.box`, `shapes.cylinder`) has a list of `runs[]` with:
+     - inputs: `deflection`, `angle_rad`
+     - outputs: `faces_with_triangulation`, `total_nodes`, `total_triangles`, `status_flags`
+   - Expectation to internalize:
+     - On curved geometry (cylinder), smaller `deflection` should usually increase `total_nodes`/`total_triangles`.
+     - On simple planar boxes, counts may stay stable across deflections because the triangulation is already minimal for flat faces.
 
 ## Spine (call chain) (required)
 
@@ -70,9 +91,17 @@ Capture OCCT’s B-Rep tessellation (“meshing”) entry points, parameterizati
 - Minimum edge length normalization: when `MinSize < Precision::Confusion()`, it is set to:
   - `Max(IMeshTools_Parameters::RelMinSize() * Min(Deflection, DeflectionInterior), Precision::Confusion())` (`occt/src/BRepMesh/BRepMesh_IncrementalMesh.hxx`, `occt/src/IMeshTools/IMeshTools_Parameters.hxx`)
 
+## Failure modes + diagnostics (recommended)
+
+- No triangulation produced: check whether parameters were rejected (deflection/angle clamped/exception) and whether the context phases ran (`BuildModel`/`DiscretizeEdges`/`DiscretizeFaces`).
+- Mesh density surprises: remember `Relative`/`Absolute` policies (and any min-size normalization); deflection can be internally adjusted (especially `MinSize`).
+- Non-deterministic counts: ensure parallel meshing isn’t enabled and that you’re not reusing cached triangulations without cleaning (`IMeshTools_Context` / `CleanModel`).
+
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `repros/lane-meshing/` if/when needed).
+- Path: `repros/lane-meshing/README.md`
+- How to run: `repros/lane-meshing/run.sh`
+- Oracle outputs: `repros/lane-meshing/golden/meshing.json`
 
 ## Compare to papers / alternatives
 

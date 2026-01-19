@@ -6,6 +6,16 @@ Status: draft
 
 Capture OCCT’s interactive visualization stack at the abstraction boundaries an application typically touches: interactive objects and selection (`AIS_*`), viewer/view lifecycle (`V3d_*`), and rendering backend separation (`Graphic3d_*` vs `OpenGl_*`). The emphasis here is on how shapes become presentations in a viewer, how selection/highlighting is managed, and what the driver abstraction is responsible for.
 
+## Mental model (human-first)
+
+Visualization in OCCT is a layered pipeline that turns “a shape” into “something you can see and pick”:
+- `AIS_*` is the application-facing layer: interactive objects, display modes, selection/highlight policies.
+- `Prs3d` / presentation managers build and cache the draw structures for those interactive objects.
+- `V3d_*` manages viewers and views (camera, clipping, redraw).
+- `Graphic3d` abstracts the rendering driver; `OpenGl_*` is the default backend implementation.
+
+If you understand these boundaries, debugging becomes much simpler: most “why is this not visible/selectable?” issues are either an AIS-context state issue (modes/selection) or a view/driver lifecycle issue (structures not updated/redrawn).
+
 ## Provenance (required)
 
 - OCCT version + build config: `notes/maps/provenance.md`
@@ -13,9 +23,20 @@ Capture OCCT’s interactive visualization stack at the abstraction boundaries a
 
 ## Scenario + observable outputs (required)
 
-- Scenario: display an `AIS_Shape` in an `AIS_InteractiveContext`, enable subshape selection, and redraw.
-- Observable outputs: display status; active selection modes; highlight style Z-layer usage; driver capability limits.
-- Success criteria: selection/highlight behavior is consistent and controllable via context settings.
+- Scenario: tessellate a shape using `Prs3d_Drawer` settings and inspect the resulting triangulation size proxies (no GUI).
+- Observable outputs: absolute vs relative deflection; effective deflection; whether tessellation existed and was recomputed; node/triangle counts.
+- Success criteria: tessellation is reproducible under fixed settings and responds predictably to deflection policy.
+
+## Walkthrough (repro-driven)
+
+1) Run: `bash repros/lane-visualization/run.sh`
+2) Inspect the oracle output: `repros/lane-visualization/golden/visualization.json`
+3) Use it to connect “drawer settings” to “triangle counts”:
+   - For each shape (`shapes.box`, `shapes.cylinder`), compare scenarios under `scenarios.*`:
+     - Policy knobs: `deflection_mode` plus `abs_deflection` / `rel_coeff`
+     - What OCCT actually uses: `effective_deflection`
+     - Whether tessellation existed and was recomputed: `is_tessellated_before/after`, `tessellate_recomputed`
+     - Size proxies: `triangulation.total_nodes` and `triangulation.total_triangles`
 
 ## Spine (call chain) (required)
 
@@ -71,9 +92,17 @@ Capture OCCT’s interactive visualization stack at the abstraction boundaries a
 - VBO usage constraints: `OpenGl_GraphicDriver::EnableVBO()` warns it should be called before any primitives are displayed; disabling VBO degrades performance. (`occt/src/OpenGl/OpenGl_GraphicDriver.hxx`)
 - Vertical sync control: driver abstraction exposes `IsVerticalSync()`/`SetVerticalSync()` and OpenGL driver implements them. (`occt/src/Graphic3d/Graphic3d_GraphicDriver.hxx`, `occt/src/OpenGl/OpenGl_GraphicDriver.hxx`)
 
+## Failure modes + diagnostics (recommended)
+
+- “My shape isn’t tessellated”: check whether the deflection policy is too strict/too loose and whether tessellation is actually invoked (the repro records before/after + recompute flags).
+- Triangulation density surprises: compare `effective_deflection` rather than just the raw drawer parameters; relative policies can produce counterintuitive results depending on shape size.
+- GUI issues (not covered by repro): if display/selection is broken in an app, focus on `AIS_InteractiveContext` state (display/selection modes, highlight style) and `V3d_View` redraw lifecycle.
+
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `repros/lane-visualization/` if/when needed).
+- Path: `repros/lane-visualization/README.md`
+- How to run: `repros/lane-visualization/run.sh`
+- Oracle outputs: `repros/lane-visualization/golden/visualization.json`
 
 ## Compare to papers / alternatives
 

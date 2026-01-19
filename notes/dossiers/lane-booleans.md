@@ -6,6 +6,18 @@ Status: draft
 
 Capture OCCT’s Boolean Operations (“BOP”) subsystem at a practical level: the separation between (1) intersection / splitting, (2) data structure storage of intersections and “same domain” groupings, and (3) building/assembling final results (fuse/common/cut/section). Focus is on the shape-level API contracts and the robustness knobs surfaced through this stack.
 
+## Mental model (human-first)
+
+OCCT booleans are not “one algorithm”; they are a **pipeline** that turns two sets of shapes into a new topology graph. The two most important phases are:
+
+1) **Intersection + splitting**: compute intersections between arguments, create “paves” (split points), and split edges/faces so that the result can be assembled from compatible pieces.
+2) **Build result**: classify pieces as IN/OUT/ON and stitch the kept pieces into a valid result shape.
+
+The hard part is robustness: almost everything is tolerance-driven, and the system exposes a report mechanism so you can see warnings/failures rather than guessing. When debugging, you usually want to answer:
+- Did we successfully compute and store intersections?
+- Did splitting produce consistent sub-edges/sub-faces?
+- Did classification choose the expected pieces?
+
 ## Provenance (required)
 
 - OCCT version + build config: `notes/maps/provenance.md`
@@ -16,6 +28,18 @@ Capture OCCT’s Boolean Operations (“BOP”) subsystem at a practical level: 
 - Scenario: fuse two solids that partially overlap.
 - Observable outputs: warning/error alerts in `BOPAlgo_Options` report; counts of result solids/faces/edges.
 - Success criteria: result is non-null; no fail alerts; stable topology counts within tolerance expectations.
+
+## Walkthrough (repro-driven)
+
+1) Run: `bash repros/lane-booleans/run.sh`
+2) Inspect the oracle output: `repros/lane-booleans/golden/booleans.json`
+3) Read it as “is the pipeline healthy?” signals:
+   - Inputs sanity: `inputs.*.bbox` should match the constructed operands.
+   - Per operation (`ops.fuse`, `ops.common`, `ops.cut`):
+     - Health: `has_errors=false` and `has_warnings=false`
+     - Validity: `is_valid=true` (via `BRepCheck_Analyzer`)
+     - Topology size proxies: `counts.{solids,faces,edges,vertices}`
+     - Geometry envelope: `bbox` should match the expected extents of the boolean result.
 
 ## Spine (call chain) (required)
 
@@ -70,9 +94,17 @@ Capture OCCT’s Boolean Operations (“BOP”) subsystem at a practical level: 
 - Warning/error surface from intersection: `BOPAlgo_PaveFiller` documents a set of warning alerts (self-interference, too small/not splittable edges, bad positioning, intersection failures, acquired self-intersection, p-curve building failures) and error alerts (too few arguments, intersection failed, null input shapes). (`occt/src/BOPAlgo/BOPAlgo_PaveFiller.hxx`)
 - Build-phase validations: `BOPAlgo_BOP` adds build-phase specific error/warning alerts around invalid operation type, disallowed operation on inputs, empty shapes, and solid-building failures. (`occt/src/BOPAlgo/BOPAlgo_BOP.hxx`)
 
+## Failure modes + diagnostics (recommended)
+
+- `has_errors=true`: treat this as “intersection/splitting failed”; the next step is to inspect the underlying `Message_Report` (surfaced via `BOPAlgo_Options`) and consider healing inputs first (`ShapeFix_*`).
+- `is_valid=false`: the boolean produced a result but it violates B-Rep validity checks; common causes are tolerance mismatches, tiny edges, and inconsistent same-domain decisions.
+- Topology counts change unexpectedly between runs: look for parallelism/ordering changes and tolerance knobs (`SetFuzzyValue`, glue mode); booleans are sensitive to small numeric differences.
+
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `repros/lane-booleans/` if/when needed).
+- Path: `repros/lane-booleans/README.md`
+- How to run: `repros/lane-booleans/run.sh`
+- Oracle outputs: `repros/lane-booleans/golden/booleans.json`
 
 ## Compare to papers / alternatives
 

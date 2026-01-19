@@ -2,9 +2,9 @@
 id: task-5.3
 title: 'Repro+Oracle: brep-geometry-bridge'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 01:00'
-updated_date: '2026-01-15 02:13'
+updated_date: '2026-01-18 22:50:54'
 labels:
   - 'lane:brep-geometry-bridge'
   - 'type:oracle'
@@ -13,7 +13,6 @@ dependencies:
   - task-5.2
 parent_task_id: task-5
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->

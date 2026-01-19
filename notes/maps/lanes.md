@@ -64,6 +64,22 @@ Map evidence:
 - `BOPAlgo` is a top package by size in `notes/maps/packages.md`.
 - `BOPAlgo` -> `BOPDS` and `BOPAlgo` -> `TopoDS` appear as heavy edges in `notes/maps/include_graph.core.md`.
 
+## lane:fillets
+
+Focus: edge blending operations (fillet/chamfer) and the fillet builder pipeline for solids/shells.
+
+Entry packages:
+- `BRepFilletAPI`, `FilletSurf`, `ChFi3d`, `ChFiDS`, `ChFiKPart`
+
+Anchor symbols (examples):
+- `occt/src/BRepFilletAPI/BRepFilletAPI_MakeFillet.hxx` (`BRepFilletAPI_MakeFillet`)
+- `occt/src/ChFi3d/ChFi3d_Builder.hxx` (`ChFi3d_Builder`)
+- `occt/src/ChFiDS/ChFiDS_ErrorStatus.hxx` (`ChFiDS_ErrorStatus`)
+
+Map evidence:
+- `ChFi3d` -> `ChFiDS` is a heavy internal edge in `notes/maps/include_graph.core.md` (fillet builder depends on fillet DS).
+- `TKFillet` toolkit sits on top of `TKBRep`, `TKGeomAlgo`, and `TKTopAlgo` (see `notes/maps/cmake-targets.dot.TKFillet`).
+
 ## lane:shape-healing-analysis
 
 Focus: shape validation, fixing, and upgrades; typical entry points when dealing with imperfect input.

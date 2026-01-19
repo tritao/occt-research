@@ -8,7 +8,7 @@ Focus: boolean operations pipeline, data structures, and robustness decisions.
 
 - Lane map: `notes/maps/lane-booleans.md`
 - Dossier: `notes/dossiers/lane-booleans.md`
-- Repro: `repros/lane-booleans/README.md` (missing)
+- Repro: `repros/lane-booleans/README.md`
 
 ## Entry packages
 
@@ -25,25 +25,30 @@ Focus: boolean operations pipeline, data structures, and robustness decisions.
 ## Lane overview
 
 <!-- MANUAL:LANE_OVERVIEW:BEGIN -->
-- Boundary (in/out of scope): TODO
-- Canonical scenario: TODO
-- Observable outputs: TODO
-- Key invariants/tolerances to remember: TODO
+- Boundary (in/out of scope): boolean ops pipeline (intersect/split → build result) and its diagnostics; excludes input quality fixing (shape healing) except as preconditions.
+- Canonical scenario: fuse two overlapping solids; inspect result topology counts and the algorithm report for warnings/failures.
+- Observable outputs: `BOPAlgo_Options` report contents; whether the operation produces a non-null result; stability of face/edge counts across runs/params.
+- Key invariants/tolerances to remember: most decisions are tolerance-driven; failures are expected and are surfaced via reports—treat booleans as “pipeline with diagnostics”, not a black box.
 <!-- MANUAL:LANE_OVERVIEW:END -->
 
 ## 10k-ft spine
 
 5–10 symbols max, higher-level than the dossier spine:
 <!-- MANUAL:LANE_SPINE:BEGIN -->
-- TODO
+- `occt/src/BRepAlgoAPI/BRepAlgoAPI_BooleanOperation.hxx` — `BRepAlgoAPI_BooleanOperation::Build` (public entry)
+- `occt/src/BRepAlgoAPI/BRepAlgoAPI_BuilderAlgo.hxx` — `BRepAlgoAPI_BuilderAlgo` (orchestration)
+- `occt/src/BOPAlgo/BOPAlgo_PaveFiller.hxx` — `BOPAlgo_PaveFiller` (intersection + splitting)
+- `occt/src/BOPDS/BOPDS_DS.hxx` — `BOPDS_DS` (stores split/section data)
+- `occt/src/BOPAlgo/BOPAlgo_BOP.hxx` — `BOPAlgo_BOP` (build/stitch result)
+- `occt/src/BOPAlgo/BOPAlgo_Options.hxx` — `BOPAlgo_Options::GetReport` (diagnostics)
 <!-- MANUAL:LANE_SPINE:END -->
 
 ## Backlog tasks
 
-- `task-11.1` (To Do) — Schema migrate (strict): notes/dossiers/lane-booleans.md (`backlog/tasks/task-11.1 - Schema-migrate-notes-dossiers-lane-booleans-md.md`)
-- `task-11.10` (To Do) — Schema migrate (strict): notes/maps/lane-booleans.md (`backlog/tasks/task-11.10 - Schema-migrate-notes-maps-lane-booleans-md.md`)
-- `task-6` (In Progress) — Lane: booleans (`backlog/tasks/task-6 - Lane-booleans.md`)
+- `task-11.1` (Done) — Schema migrate (strict): notes/dossiers/lane-booleans.md (`backlog/tasks/task-11.1 - Schema-migrate-strict-notes-dossiers-lane-booleans.md.md`)
+- `task-11.10` (Done) — Schema migrate (strict): notes/maps/lane-booleans.md (`backlog/tasks/task-11.10 - Schema-migrate-strict-notes-maps-lane-booleans.md.md`)
+- `task-6` (Done) — Lane: booleans (`backlog/tasks/task-6 - Lane-booleans.md`)
 - `task-6.1` (Done) — Map: booleans (`backlog/tasks/task-6.1 - Map-booleans.md`)
 - `task-6.2` (Done) — Dossier: booleans (`backlog/tasks/task-6.2 - Dossier-booleans.md`)
-- `task-6.3` (To Do) — Repro+Oracle: booleans (`backlog/tasks/task-6.3 - Repro-booleans.md`)
+- `task-6.3` (Done) — Repro+Oracle: booleans (`backlog/tasks/task-6.3 - ReproOracle-booleans.md`)
 

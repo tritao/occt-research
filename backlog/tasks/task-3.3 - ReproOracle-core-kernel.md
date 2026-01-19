@@ -2,9 +2,9 @@
 id: task-3.3
 title: 'Repro+Oracle: core-kernel'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 01:00'
-updated_date: '2026-01-15 02:17'
+updated_date: '2026-01-18 22:50:54'
 labels:
   - 'lane:core-kernel'
   - 'type:oracle'
@@ -13,7 +13,6 @@ dependencies:
   - task-3.2
 parent_task_id: task-3
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->

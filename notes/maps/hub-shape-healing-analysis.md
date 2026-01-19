@@ -8,7 +8,7 @@ Focus: shape validation, fixing, and upgrades; typical entry points when dealing
 
 - Lane map: `notes/maps/lane-shape-healing-analysis.md`
 - Dossier: `notes/dossiers/lane-shape-healing-analysis.md`
-- Repro: `repros/lane-shape-healing-analysis/README.md` (missing)
+- Repro: `repros/lane-shape-healing-analysis/README.md`
 
 ## Entry packages
 
@@ -23,25 +23,29 @@ Focus: shape validation, fixing, and upgrades; typical entry points when dealing
 ## Lane overview
 
 <!-- MANUAL:LANE_OVERVIEW:BEGIN -->
-- Boundary (in/out of scope): TODO
-- Canonical scenario: TODO
-- Observable outputs: TODO
-- Key invariants/tolerances to remember: TODO
+- Boundary (in/out of scope): diagnosing/fixing imperfect shapes and recording modifications; excludes the downstream consumers (booleans/meshing/exchange) except as motivation.
+- Canonical scenario: run `ShapeFix_Shape` on a problematic imported shape, then inspect DONE/FAIL flags and the reshape mapping to see what changed.
+- Observable outputs: per-tool DONE/FAIL status; tolerance scans/min-max; reshaped subshape substitutions via `ShapeBuild_ReShape`.
+- Key invariants/tolerances to remember: repairs are policy-driven (modes + tolerance bounds); many fixes adjust tolerances, so always track what was changed and why.
 <!-- MANUAL:LANE_OVERVIEW:END -->
 
 ## 10k-ft spine
 
 5–10 symbols max, higher-level than the dossier spine:
 <!-- MANUAL:LANE_SPINE:BEGIN -->
-- TODO
+- `occt/src/ShapeFix/ShapeFix_Shape.hxx` — `ShapeFix_Shape::Perform` (high-level façade)
+- `occt/src/ShapeFix/ShapeFix_Root.hxx` — `ShapeFix_Root` (precision + tolerance bounds + context)
+- `occt/src/ShapeFix/ShapeFix_Wire.hxx` — `ShapeFix_Wire::Perform` (wire repair pipeline)
+- `occt/src/ShapeAnalysis/ShapeAnalysis_ShapeTolerance.hxx` — `ShapeAnalysis_ShapeTolerance` (tolerance scans)
+- `occt/src/ShapeBuild/ShapeBuild_ReShape.hxx` — `ShapeBuild_ReShape` (record/apply substitutions)
 <!-- MANUAL:LANE_SPINE:END -->
 
 ## Backlog tasks
 
-- `task-11.15` (To Do) — Schema migrate (strict): notes/maps/lane-shape-healing-analysis.md (`backlog/tasks/task-11.15 - Schema-migrate-notes-maps-lane-shape-healing-analysis-md.md`)
-- `task-11.6` (To Do) — Schema migrate (strict): notes/dossiers/lane-shape-healing-analysis.md (`backlog/tasks/task-11.6 - Schema-migrate-notes-dossiers-lane-shape-healing-analysis-md.md`)
-- `task-7` (In Progress) — Lane: shape-healing-analysis (`backlog/tasks/task-7 - Lane-shape-healing-analysis.md`)
+- `task-11.15` (Done) — Schema migrate (strict): notes/maps/lane-shape-healing-analysis.md (`backlog/tasks/task-11.15 - Schema-migrate-strict-notes-maps-lane-shape-healing-analysis.md.md`)
+- `task-11.6` (Done) — Schema migrate (strict): notes/dossiers/lane-shape-healing-analysis.md (`backlog/tasks/task-11.6 - Schema-migrate-strict-notes-dossiers-lane-shape-healing-analysis.md.md`)
+- `task-7` (Done) — Lane: shape-healing-analysis (`backlog/tasks/task-7 - Lane-shape-healing-analysis.md`)
 - `task-7.1` (Done) — Map: shape-healing-analysis (`backlog/tasks/task-7.1 - Map-shape-healing-analysis.md`)
 - `task-7.2` (Done) — Dossier: shape-healing-analysis (`backlog/tasks/task-7.2 - Dossier-shape-healing-analysis.md`)
-- `task-7.3` (To Do) — Repro+Oracle: shape-healing-analysis (`backlog/tasks/task-7.3 - Repro-shape-healing-analysis.md`)
+- `task-7.3` (Done) — Repro+Oracle: shape-healing-analysis (`backlog/tasks/task-7.3 - ReproOracle-shape-healing-analysis.md`)
 

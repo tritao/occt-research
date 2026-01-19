@@ -4,7 +4,7 @@ title: 'Dossier: core-kernel'
 status: Done
 assignee:
 created_date: '2026-01-14 23:59'
-updated_date: '2026-01-15 01:54:26'
+updated_date: '2026-01-18 22:50:54'
 labels:
   - 'lane:core-kernel'
   - 'type:dossier'

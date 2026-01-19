@@ -14,6 +14,8 @@ CACHE := ROOT + "/.cache"
 OCCT_DIR := ROOT + "/occt"
 BUILD_DIR := ROOT + "/build-occt"
 MAPS_DIR := ROOT + "/notes/maps"
+PY := "./tools/py.sh"
+VENV_PY := ROOT + "/.venv/bin/python"
 
 default: bootstrap
 
@@ -49,6 +51,13 @@ local-dirs:
 	mkdir -p "{{BIN}}" "{{CACHE}}" "{{MAPS_DIR}}" "{{ROOT}}/notes/dossiers" "{{ROOT}}/repros" "{{ROOT}}/oracles"
 	@echo "Local dirs ready: {{LOCAL}}"
 
+# --- Python tools deps (uv venv) -------------------------------------------
+
+py-venv:
+	UV_CACHE_DIR="{{CACHE}}/uv" uv venv --python "$(command -v python3)"
+	UV_CACHE_DIR="{{CACHE}}/uv" uv pip install --python "{{VENV_PY}}" -r tools/requirements.txt
+	@echo "Python venv ready: {{VENV_PY}}"
+
 # --- Node tools: Backlog.md + Codex CLI ------------------------------------
 
 node-tools:
@@ -62,7 +71,7 @@ go-tools:
 # --- clangd (local download from LLVM GitHub releases) ----------------------
 
 clangd:
-	python3 ./tools/install_clangd_local.py --prefix "{{LOCAL}}" --cache "{{CACHE}}/llvm"
+	{{PY}} ./tools/install_clangd_local.py --prefix "{{LOCAL}}" --cache "{{CACHE}}/llvm"
 
 # --- OCCT -------------------------------------------------------------------
 
@@ -82,28 +91,48 @@ maps:
 	./tools/gen_maps.sh "{{OCCT_DIR}}" "{{BUILD_DIR}}" "{{MAPS_DIR}}"
 
 validate-md:
-	python3 ./tools/validate_md_types.py --root . --level baseline
+	{{PY}} ./tools/validate_md_types.py --root . --level baseline
 
 validate-md-strict:
-	python3 ./tools/validate_md_types.py --root . --level strict
+	{{PY}} ./tools/validate_md_types.py --root . --level strict
 
 overview:
-	python3 ./tools/gen_overview_pages.py --root .
+	{{PY}} ./tools/gen_overview_pages.py --root .
 
 schema-seed:
-	python3 ./tools/seed_schema_migration_tasks.py --level strict
+	{{PY}} ./tools/seed_schema_migration_tasks.py --level strict
 
 backlog-sync:
-	python3 ./tools/backlog_sync.py
+	{{PY}} ./tools/backlog_sync.py
 
 backlog-sync-dry:
-	python3 ./tools/backlog_sync.py --dry-run
+	{{PY}} ./tools/backlog_sync.py --dry-run
 
 sync:
 	just validate-md
 	just overview
 	just schema-seed
 	just backlog-sync
+
+# --- Docs site (Astro Starlight) -------------------------------------------
+
+site-sync:
+	{{PY}} ./tools/sync_starlight_site.py --root . --site site --dest-subdir occt
+
+site-dev: site-sync
+	(cd site && npm run dev)
+
+site-watch:
+	(cd site && npm run dev:watch)
+
+site-sync-clean:
+	{{PY}} ./tools/sync_starlight_site.py --root . --site site --dest-subdir occt --clean
+
+site-build: site-sync
+	(cd site && npm run build)
+
+site-preview: site-build
+	(cd site && npm run preview)
 
 # --- Backlog ----------------------------------------------------------------
 

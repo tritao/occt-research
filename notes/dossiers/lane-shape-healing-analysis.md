@@ -6,6 +6,19 @@ Status: draft
 
 Capture the “shape healing” toolkit that sits between raw/topologically-valid OCCT shapes and downstream algorithms that assume cleaner inputs (booleans, meshing, exchange). This dossier focuses on (1) how fixing is structured (facades and per-entity tools), (2) how tolerances are inspected/limited, and (3) how upgrades record modifications through a context / reshape mechanism.
 
+## Mental model (human-first)
+
+This lane is the “make it usable” layer that sits between real-world inputs and strict modeling algorithms. The key pattern is:
+- **Analyze** a shape to find defects (gaps, small edges, inconsistent orientation, tolerance issues).
+- **Fix** using a staged pipeline (whole shape → faces → wires → edges).
+- **Record modifications** so callers can understand and post-process what changed.
+
+In OCCT, fixes are rarely “silent”. The system tends to expose:
+- statuses/flags (“done”, “failed”, etc.)
+- a *reshape* mapping (old subshape → new subshape) so downstream code can update references
+
+If you’re seeing booleans/meshing/exchange failures, this lane is often the pragmatic first stop: heal enough for the downstream algorithm to have a clean topological/parametric substrate.
+
 ## Provenance (required)
 
 - OCCT version + build config: `notes/maps/provenance.md`
@@ -16,6 +29,20 @@ Capture the “shape healing” toolkit that sits between raw/topologically-vali
 - Scenario: run shape healing over an imported shape and inspect what was changed.
 - Observable outputs: DONE/FAIL status flags; messages via registrator; tolerance scans via `ShapeAnalysis_ShapeTolerance`.
 - Success criteria: fixes surface as explicit status/messages and are reproducible.
+
+## Walkthrough (repro-driven)
+
+1) Run: `bash repros/lane-shape-healing-analysis/run.sh`
+2) Inspect the oracle output: `repros/lane-shape-healing-analysis/golden/shape-healing.json`
+3) Use it to reason about what “healing” means mechanically:
+   - Inputs + policy: `params.gap_y`, `params.max_tolerance`, `params.precision_confusion`
+   - Before/after observables:
+     - Gap distance: `before.gap` → `after.gap`
+     - Topological closure: `before.topo_closed` → `after.topo_closed`
+     - Tolerances adjusted as part of the fix: `before.v_first_tolerance` / `before.v_last_tolerance` vs after
+   - Fix outcomes:
+     - Which steps did anything: `fix.fix_connected_return`, `fix.fix_closed_return`
+     - Status interpretation: `fix.status_connected` and `fix.status_closed` (DONE/FAIL/OK flags)
 
 ## Spine (call chain) (required)
 
@@ -73,9 +100,17 @@ Capture the “shape healing” toolkit that sits between raw/topologically-vali
 - Hardcoded heuristics appear at the tool boundary: `ShapeFix_Face::FixSmallAreaWire` documents detecting “small area wires” with area less than `100*Precision::PConfusion()` and removing those internal wires (optionally removing faces with small outer wires). (`occt/src/ShapeFix/ShapeFix_Face.hxx`)
 - Status reporting is bitwise-like: tools query outcomes via `Status(ShapeExtend_Status)` with DONE/FAIL flags; this is shared across fixers (`ShapeFix_Shape`, `ShapeFix_Face`), reshapers (`ShapeBuild_ReShape`), and upgraders (`ShapeUpgrade_ShapeDivide`). (`occt/src/ShapeExtend/ShapeExtend_Status.hxx`, `occt/src/ShapeBuild/ShapeBuild_ReShape.hxx`)
 
+## Failure modes + diagnostics (recommended)
+
+- Fix did nothing (`fix.*_return=false` and DONE flags not set): either the defect is outside the tool’s scope (e.g., needs on-face pcurve fixes) or the defect exceeds configured bounds (precision/tolerance).
+- Gap closes but tolerances balloon: healing may “solve” a gap by increasing tolerances; always record and audit tolerance changes (`v_*_tolerance`) before using the result in downstream modeling.
+- Downstream algorithms still fail after healing: check whether the remaining issues are geometric (pcurves/seams) vs topological (connectivity/orientation); `ShapeFix_Wire` is only one piece of the stack.
+
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `repros/lane-shape-healing-analysis/` if/when needed).
+- Path: `repros/lane-shape-healing-analysis/README.md`
+- How to run: `repros/lane-shape-healing-analysis/run.sh`
+- Oracle outputs: `repros/lane-shape-healing-analysis/golden/shape-healing.json`
 
 ## Compare to papers / alternatives
 

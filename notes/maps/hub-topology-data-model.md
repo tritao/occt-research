@@ -8,7 +8,7 @@ Focus: topological data model and its invariants (shape types, locations, sharin
 
 - Lane map: `notes/maps/lane-topology-data-model.md`
 - Dossier: `notes/dossiers/lane-topology-data-model.md`
-- Repro: `repros/lane-topology-data-model/README.md` (missing)
+- Repro: `repros/lane-topology-data-model/README.md`
 
 ## Entry packages
 
@@ -24,25 +24,30 @@ Focus: topological data model and its invariants (shape types, locations, sharin
 ## Lane overview
 
 <!-- MANUAL:LANE_OVERVIEW:BEGIN -->
-- Boundary (in/out of scope): TODO
-- Canonical scenario: TODO
-- Observable outputs: TODO
-- Key invariants/tolerances to remember: TODO
+- Boundary (in/out of scope): shape identity/sharing, orientation/location semantics, traversal, and shape-keyed containers; excludes geometric meaning (curves/surfaces) except as attached “reps”.
+- Canonical scenario: instance the same payload shape twice with different `TopLoc_Location`s and verify identity tiers (`IsPartner`/`IsSame`/`IsEqual`) while traversing with `TopExp_Explorer`.
+- Observable outputs: how `TopTools_*` hashes/equality treat shapes; how location multiplication order affects placement; where orientation matters (and where it is ignored).
+- Key invariants/tolerances to remember: `TopoDS_Shape` identity is multi-tier; many maps treat `(TShape, Location)` as identity and ignore orientation by design.
 <!-- MANUAL:LANE_OVERVIEW:END -->
 
 ## 10k-ft spine
 
 5–10 symbols max, higher-level than the dossier spine:
 <!-- MANUAL:LANE_SPINE:BEGIN -->
-- TODO
+- `occt/src/TopoDS/TopoDS_Shape.hxx` — `TopoDS_Shape` (instance: payload + location + orientation)
+- `occt/src/TopoDS/TopoDS_TShape.hxx` — `TopoDS_TShape` (shared topology payload)
+- `occt/src/TopLoc/TopLoc_Location.hxx` — `TopLoc_Location` (instance placement chain)
+- `occt/src/TopAbs/TopAbs.hxx` — `TopAbs` (orientation algebra helpers)
+- `occt/src/TopExp/TopExp_Explorer.hxx` — `TopExp_Explorer` (shape graph traversal)
+- `occt/src/TopTools/TopTools_ShapeMapHasher.hxx` — `TopTools_ShapeMapHasher` (map identity semantics)
 <!-- MANUAL:LANE_SPINE:END -->
 
 ## Backlog tasks
 
-- `task-11.16` (To Do) — Schema migrate (strict): notes/maps/lane-topology-data-model.md (`backlog/tasks/task-11.16 - Schema-migrate-notes-maps-lane-topology-data-model-md.md`)
-- `task-11.7` (To Do) — Schema migrate (strict): notes/dossiers/lane-topology-data-model.md (`backlog/tasks/task-11.7 - Schema-migrate-notes-dossiers-lane-topology-data-model-md.md`)
-- `task-4` (In Progress) — Lane: topology-data-model (`backlog/tasks/task-4 - Lane-topology-data-model.md`)
+- `task-11.16` (Done) — Schema migrate (strict): notes/maps/lane-topology-data-model.md (`backlog/tasks/task-11.16 - Schema-migrate-strict-notes-maps-lane-topology-data-model.md.md`)
+- `task-11.7` (Done) — Schema migrate (strict): notes/dossiers/lane-topology-data-model.md (`backlog/tasks/task-11.7 - Schema-migrate-strict-notes-dossiers-lane-topology-data-model.md.md`)
+- `task-4` (Done) — Lane: topology-data-model (`backlog/tasks/task-4 - Lane-topology-data-model.md`)
 - `task-4.1` (Done) — Map: topology-data-model (`backlog/tasks/task-4.1 - Map-topology-data-model.md`)
 - `task-4.2` (Done) — Dossier: topology-data-model (`backlog/tasks/task-4.2 - Dossier-topology-data-model.md`)
-- `task-4.3` (To Do) — Repro+Oracle: topology-data-model (`backlog/tasks/task-4.3 - Repro-topology-data-model.md`)
+- `task-4.3` (Done) — Repro+Oracle: topology-data-model (`backlog/tasks/task-4.3 - ReproOracle-topology-data-model.md`)
 

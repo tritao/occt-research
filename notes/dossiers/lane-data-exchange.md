@@ -6,6 +6,19 @@ Status: draft
 
 Capture OCCT’s “data exchange” stack at the level where a file becomes a `TopoDS_Shape`: format-specific readers (STEP/IGES), the shared `XSControl_Reader` groundwork (work session + selections + transfer bookkeeping), and the transfer process machinery that maps an `InterfaceModel` entity graph into application objects with trace/check support.
 
+## Mental model (human-first)
+
+Data exchange in OCCT is a **two-world bridge**:
+- World A: a schema/entity graph (“interface model”) representing what the file says.
+- World B: OCCT application objects (most commonly `TopoDS_Shape`) representing what you can model with.
+
+The reader façade (`STEPControl_Reader` / `IGESControl_Reader`) loads the file, but the *real work* is transfer:
+- select which entities/roots to convert
+- transfer them into shapes
+- accumulate checks, warnings, and statistics so you can understand what was dropped, approximated, or healed
+
+If a file “loads but gives weird shapes”, you usually want to inspect the transfer process diagnostics and unit handling before blaming modeling algorithms.
+
 ## Provenance (required)
 
 - OCCT version + build config: `notes/maps/provenance.md`
@@ -16,6 +29,16 @@ Capture OCCT’s “data exchange” stack at the level where a file becomes a `
 - Scenario: read a small STEP/IGES file, transfer roots to shapes, and inspect transfer checks/statistics.
 - Observable outputs: `IFSelect_ReturnStatus`; warning/fail messages; number of transferred roots/shapes; units used during transfer.
 - Success criteria: clean inputs transfer without fail status; warnings are stable and traceable.
+
+## Walkthrough (repro-driven)
+
+1) Run: `bash repros/lane-data-exchange/run.sh`
+2) Inspect the oracle output: `repros/lane-data-exchange/golden/data-exchange.json`
+3) Read it as a minimal “import contract” checklist:
+   - STEP IO health: `step.write_status` and `step.read_status` should be `RetDone`.
+   - Transfer health: `step.nb_roots_for_transfer` and `step.nb_roots_transferred` should match expectation (usually 1 for the simple compound in this repro).
+   - “Did we preserve the shape?”: compare `source.counts`/`source.bbox` vs `imported.counts`/`imported.bbox` (they should match in this controlled roundtrip).
+   - File-level scale proxy: `step.model_nb_entities` gives a rough sense of how big the STEP model is (useful when correlating transfer time/complexity later).
 
 ## Spine (call chain) (required)
 
@@ -69,9 +92,17 @@ Capture OCCT’s “data exchange” stack at the level where a file becomes a `
 - Shape healing defaults live in readers: `STEPControl_Reader` and `IGESControl_Reader` override `GetDefaultShapeFixParameters()` and `GetDefaultShapeProcessFlags()` used by the base class, indicating format-level default healing policies. (`occt/src/STEPControl/STEPControl_Reader.hxx`, `occt/src/IGESControl/IGESControl_Reader.hxx`)
 - Printing/check support: `XSControl_Reader` provides APIs to print load/transfer checks and transfer statistics, supporting iterative “import → inspect failures/warnings → adjust parameters → retransfer” workflows. (`occt/src/XSControl/XSControl_Reader.hxx`)
 
+## Failure modes + diagnostics (recommended)
+
+- `read_status` not `RetDone`: treat as a parsing/load problem (file corrupt/unsupported variant); start by printing load checks via `XSControl_Reader`.
+- Transfer roots don’t transfer (`nb_roots_transferred` < expected): treat as a selection/transfer pipeline issue; inspect transfer checks in the `Transfer_TransientProcess` rather than assuming “empty file”.
+- Shape counts/bbox mismatch after roundtrip: suspect unit scaling, shape processing defaults, or missing representation conversions; validate unit settings first (`SystemLengthUnit`).
+
 ## Runnable repro (optional)
 
-Not created for this dossier (can be added under `repros/lane-data-exchange/` if/when needed).
+- Path: `repros/lane-data-exchange/README.md`
+- How to run: `repros/lane-data-exchange/run.sh`
+- Oracle outputs: `repros/lane-data-exchange/golden/data-exchange.json`
 
 ## Compare to papers / alternatives
 

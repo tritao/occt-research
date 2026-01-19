@@ -2,15 +2,14 @@
 id: task-6
 title: 'Lane: booleans'
 status: Done
-assignee: []
+assignee:
 created_date: '2026-01-15 00:00'
-updated_date: '2026-01-15 13:24'
+updated_date: '2026-01-18 22:50:54'
 labels:
   - 'lane:booleans'
   - 'type:lane'
-dependencies: []
+dependencies:
 ---
-
 ## Description
 
 <!-- SECTION:DESCRIPTION:BEGIN -->

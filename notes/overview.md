@@ -13,17 +13,19 @@ Key references:
 
 | Lane | Focus | Map | Dossier | Repro | Backlog |
 |---|---|---|---|---|---|
-| `core-kernel` ([hub](maps/hub-core-kernel.md)) | foundational types, math, geometry primitives and curves/surfaces. | `notes/maps/lane-core-kernel.md` | `notes/dossiers/lane-core-kernel.md` | (missing) | Done, In Progress, To Do (6) |
-| `topology-data-model` ([hub](maps/hub-topology-data-model.md)) | topological data model and its invariants (shape types, locations, sharing). | `notes/maps/lane-topology-data-model.md` | `notes/dossiers/lane-topology-data-model.md` | (missing) | Done, In Progress, To Do (6) |
-| `brep-geometry-bridge` ([hub](maps/hub-brep-geometry-bridge.md)) | boundary representation helpers that connect topology (TopoDS) to geometry (Geom, gp). | `notes/maps/lane-brep-geometry-bridge.md` | `notes/dossiers/lane-brep-geometry-bridge.md` | `repros/lane-brep-geometry-bridge/README.md` | Done, In Progress, To Do (6) |
-| `booleans` ([hub](maps/hub-booleans.md)) | boolean operations pipeline, data structures, and robustness decisions. | `notes/maps/lane-booleans.md` | `notes/dossiers/lane-booleans.md` | (missing) | Done, In Progress, To Do (6) |
-| `shape-healing-analysis` ([hub](maps/hub-shape-healing-analysis.md)) | shape validation, fixing, and upgrades; typical entry points when dealing with imperfect input. | `notes/maps/lane-shape-healing-analysis.md` | `notes/dossiers/lane-shape-healing-analysis.md` | (missing) | Done, In Progress, To Do (6) |
-| `meshing` ([hub](maps/hub-meshing.md)) | triangulation and mesh generation. | `notes/maps/lane-meshing.md` | `notes/dossiers/lane-meshing.md` | (missing) | Done, In Progress, To Do (6) |
-| `data-exchange` ([hub](maps/hub-data-exchange.md)) | STEP/IGES/XCAF import/export and translation layers. | `notes/maps/lane-data-exchange.md` | `notes/dossiers/lane-data-exchange.md` | (missing) | Done, In Progress, To Do (6) |
-| `visualization` ([hub](maps/hub-visualization.md)) | interactive visualization stack and rendering backends. | `notes/maps/lane-visualization.md` | `notes/dossiers/lane-visualization.md` | (missing) | Done, In Progress, To Do (6) |
+| `core-kernel` ([hub](maps/hub-core-kernel.md)) | foundational types, math, geometry primitives and curves/surfaces. | `notes/maps/lane-core-kernel.md` | `notes/dossiers/lane-core-kernel.md` | `repros/lane-core-kernel/README.md` | Done (6) |
+| `topology-data-model` ([hub](maps/hub-topology-data-model.md)) | topological data model and its invariants (shape types, locations, sharing). | `notes/maps/lane-topology-data-model.md` | `notes/dossiers/lane-topology-data-model.md` | `repros/lane-topology-data-model/README.md` | Done (6) |
+| `brep-geometry-bridge` ([hub](maps/hub-brep-geometry-bridge.md)) | boundary representation helpers that connect topology (TopoDS) to geometry (Geom, gp). | `notes/maps/lane-brep-geometry-bridge.md` | `notes/dossiers/lane-brep-geometry-bridge.md` | `repros/lane-brep-geometry-bridge/README.md` | Done (6) |
+| `booleans` ([hub](maps/hub-booleans.md)) | boolean operations pipeline, data structures, and robustness decisions. | `notes/maps/lane-booleans.md` | `notes/dossiers/lane-booleans.md` | `repros/lane-booleans/README.md` | Done (6) |
+| `fillets` ([hub](maps/hub-fillets.md)) | edge blending operations (fillet/chamfer) and the fillet builder pipeline for solids/shells. | `notes/maps/lane-fillets.md` | `notes/dossiers/lane-fillets.md` | `repros/lane-fillets/README.md` | (none) |
+| `shape-healing-analysis` ([hub](maps/hub-shape-healing-analysis.md)) | shape validation, fixing, and upgrades; typical entry points when dealing with imperfect input. | `notes/maps/lane-shape-healing-analysis.md` | `notes/dossiers/lane-shape-healing-analysis.md` | `repros/lane-shape-healing-analysis/README.md` | Done (6) |
+| `meshing` ([hub](maps/hub-meshing.md)) | triangulation and mesh generation. | `notes/maps/lane-meshing.md` | `notes/dossiers/lane-meshing.md` | `repros/lane-meshing/README.md` | Done (6) |
+| `data-exchange` ([hub](maps/hub-data-exchange.md)) | STEP/IGES/XCAF import/export and translation layers. | `notes/maps/lane-data-exchange.md` | `notes/dossiers/lane-data-exchange.md` | `repros/lane-data-exchange/README.md` | Done (6) |
+| `visualization` ([hub](maps/hub-visualization.md)) | interactive visualization stack and rendering backends. | `notes/maps/lane-visualization.md` | `notes/dossiers/lane-visualization.md` | `repros/lane-visualization/README.md` | Done (6) |
 
 <!-- MANUAL:OVERVIEW_NOTES:BEGIN -->
-- Notes: TODO
+- If you’re learning “how OCCT works”, start with a lane hub (`notes/maps/hub-<lane>.md`) and read the `Mental model (human-first)` section in the matching dossier.
+- Each lane has a runnable repro under `repros/lane-<lane>/` with a JSON oracle in `repros/lane-<lane>/golden/` to make the concepts concrete.
 <!-- MANUAL:OVERVIEW_NOTES:END -->
 
 ## Recommended reading order (per lane)

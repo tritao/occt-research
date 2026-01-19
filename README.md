@@ -41,6 +41,36 @@ If you want faster symbol search, build a clangd index after configuration:
 just clangd-index
 ```
 
+## Optional: docs website (Astro Starlight)
+
+If you want a browsable website for the lane hubs/maps/dossiers/repros:
+
+```bash
+# sync repo docs into the site + start dev server
+just site-dev
+```
+
+Other commands:
+- `just site-watch` (sync + dev server + auto-resync on changes)
+- `just site-sync` (sync site content from `notes/` + `repros/`)
+- `just site-build` (static build into `site/dist/`)
+
+### Publish to GitHub Pages
+
+1) In GitHub: Settings → Pages → Source: “GitHub Actions”
+2) Push to your default branch (or run the workflow manually): `.github/workflows/deploy-site.yml`
+
+Notes:
+- Publishes the static build from `site/dist/`.
+- On GitHub Actions, `site/astro.config.mjs` auto-sets `base: "/<repo>/"` for project pages.
+
+## Python deps (validator + generators)
+
+Some repo tooling (e.g. `just validate-md`, `just sync`) needs Python deps like `jsonschema`.
+
+- Preferred (no sudo, uses `uv`): `just py-venv`
+- Alternative (system install): `sudo apt install python3-jsonschema`
+
 ## What gets created
 
 - `occt/` (OCCT source checkout)
