@@ -47,7 +47,7 @@ Chamfer:
 Shared diagnostics surface (fillets expose it directly; chamfers mostly don’t):
 - `occt/src/ChFiDS/ChFiDS_ErrorStatus.hxx` — `ChFiDS_ErrorStatus`
 
-## Scenario + observable outputs (evidence-driven)
+## Scenario + observable outputs
 
 Use the fillets repro to keep this dossier grounded in observable fields:
 - Repro runner: `repros/lane-fillets/run.sh`
@@ -60,6 +60,17 @@ All outputs are recorded to `repros/lane-fillets/golden/fillets.json`:
 - fillet-only diagnostics: `StripeStatus(IC)` + `NbFaultyContours()` + `NbFaultyVertices()`
 - geometry/topology outcomes: `result.is_valid` (via `BRepCheck_Analyzer`), topo counts, bbox, face surface-type histogram
 - “partial result” behavior for fillets: `HasResult()` + `BadShape()` (only meaningful when corners fail but some stripes succeeded)
+
+## Spine (call chain)
+
+Suggested reading order (public → internal):
+
+1) `occt/src/BRepFilletAPI/BRepFilletAPI_MakeFillet.hxx` — public API (`Add`, `Build`, contour inspection + `StripeStatus`)
+2) `occt/src/ChFi3d/ChFi3d_FilBuilder.hxx` — fillet builder (inherits the shared builder base)
+3) `occt/src/ChFi3d/ChFi3d_Builder.hxx` — shared builder: “compute surfaces + rebuild topology”
+4) `occt/src/ChFiDS/ChFiDS_Spine.hxx` — spine (guideline) data model + key warning about non‑C2 guidance
+5) `occt/src/ChFiDS/ChFiDS_Stripe.hxx` / `occt/src/ChFiDS/ChFiDS_SurfData.hxx` — stripe + patch/interference state
+6) `occt/src/ChFiKPart/ChFiKPart_ComputeData.cxx` — analytic special cases (KPart) vs general paths
 
 ## Core data structures + invariants
 

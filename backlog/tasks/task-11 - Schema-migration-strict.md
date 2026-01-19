@@ -4,7 +4,7 @@ title: Schema migration (strict)
 status: Done
 assignee:
 created_date: '2026-01-15 01:29:54'
-updated_date: '2026-01-18 22:32:18'
+updated_date: '2026-01-19 01:04:27'
 labels:
   - 'schema-migration'
 dependencies:
@@ -15,7 +15,7 @@ dependencies:
 Schema migration meta-task (auto-managed).
 
 - schema_migration_level: strict
-- schema_fingerprint: a697ee6cc01b
+- schema_fingerprint: 8d399b7fc72e
 
 Run:
 - `just validate-md-strict`

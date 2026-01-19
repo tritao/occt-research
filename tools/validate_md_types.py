@@ -17,6 +17,7 @@ class DocType:
 
 DOC_TYPES = [
     DocType(kind="dossier", schema_path=Path("tools/schemas/md_dossier.schema.json")),
+    DocType(kind="algorithm-dossier", schema_path=Path("tools/schemas/md_algorithm_dossier.schema.json")),
     DocType(kind="lane-map", schema_path=Path("tools/schemas/md_lane_map.schema.json")),
     DocType(kind="repro-readme", schema_path=Path("tools/schemas/md_repro_readme.schema.json")),
 ]
@@ -26,6 +27,8 @@ HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 
 
 def detect_kind(rel_path: str) -> str | None:
+    if rel_path.startswith("notes/dossiers/algorithm-") and rel_path.endswith(".md"):
+        return "algorithm-dossier"
     if rel_path.startswith("notes/dossiers/") and rel_path.endswith(".md"):
         return "dossier"
     if rel_path.startswith("notes/maps/lane-") and rel_path.endswith(".md"):

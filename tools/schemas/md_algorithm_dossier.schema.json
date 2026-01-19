@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "md_algorithm_dossier.schema.json",
+  "title": "OCCT algorithm dossier markdown (extracted)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "path", "title", "headings"],
+  "properties": {
+    "kind": { "const": "algorithm-dossier" },
+    "path": { "type": "string" },
+    "title": { "type": "string", "minLength": 1 },
+    "headings": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "allOf": [
+    { "properties": { "path": { "pattern": "^notes/dossiers/algorithm-.+\\.md$" } } },
+    { "properties": { "headings": { "contains": { "const": "## Purpose" } } } },
+    { "properties": { "headings": { "contains": { "pattern": "^## Provenance\\b" } } } },
+    { "properties": { "headings": { "contains": { "pattern": "^## Scenario \\+ observable outputs\\b" } } } },
+    { "properties": { "headings": { "contains": { "pattern": "^## Spine \\(call chain\\)$" } } } },
+    { "properties": { "headings": { "contains": { "const": "## High-level pipeline" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Key classes/files" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Core data structures + invariants" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Tolerance / robustness behaviors (observed)" } } } },
+    { "properties": { "headings": { "contains": { "const": "## Compare to papers / alternatives" } } } }
+  ]
+}

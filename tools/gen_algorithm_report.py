@@ -206,20 +206,20 @@ def main() -> int:
         "Produce a human-first, debuggable explanation of this algorithm, anchored in OCCT source files and runnable repro outputs."
     )
     lines.append("")
-    lines.append("## Provenance (required)")
+    lines.append("## Provenance")
     lines.append("")
     lines.append(f"- OCCT version: {occt_version or 'see `notes/maps/provenance.md`'}")
     if repro_json:
         lines.append(f"- Evidence repro/oracle: `{repro_json.relative_to(repo)}`")
     lines.append("- Maps provenance: `notes/maps/provenance.md`")
     lines.append("")
-    lines.append("## Scenario + observable outputs (required)")
+    lines.append("## Scenario + observable outputs")
     lines.append("")
     lines.append("- Scenario: (describe one concrete, runnable scenario for this algorithm)")
     lines.append("- Observable outputs: (oracle fields, error/status codes, topology counts, bboxes, timings)")
     lines.append("- Success criteria: (what “good” looks like + tolerances)")
     lines.append("")
-    lines.append("## Spine (call chain) (required)")
+    lines.append("## Spine (call chain)")
     lines.append("")
     if lane.anchor_symbols:
         for i, (path, sym) in enumerate(lane.anchor_symbols[:10], 1):
@@ -297,4 +297,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
