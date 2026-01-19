@@ -25,7 +25,7 @@ export default defineConfig({
 						{
 							label: 'Core Kernel',
 							items: [
-								{ label: 'Hub', slug: 'occt/maps/hub-core-kernel' },
+								{ label: 'Overview', slug: 'occt/maps/hub-core-kernel' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-core-kernel' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-core-kernel' },
 								{ label: 'Walkthrough', slug: 'occt/walkthroughs/core-kernel' },
@@ -36,7 +36,7 @@ export default defineConfig({
 						{
 							label: 'Topology Data Model',
 							items: [
-								{ label: 'Hub', slug: 'occt/maps/hub-topology-data-model' },
+								{ label: 'Overview', slug: 'occt/maps/hub-topology-data-model' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-topology-data-model' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-topology-data-model' },
 								{ label: 'Walkthrough', slug: 'occt/walkthroughs/topology-data-model' },
@@ -47,7 +47,7 @@ export default defineConfig({
 						{
 							label: 'B-Rep Geometry Bridge',
 							items: [
-								{ label: 'Hub', slug: 'occt/maps/hub-brep-geometry-bridge' },
+								{ label: 'Overview', slug: 'occt/maps/hub-brep-geometry-bridge' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-brep-geometry-bridge' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-brep-geometry-bridge' },
 								{ label: 'Walkthrough', slug: 'occt/walkthroughs/brep-geometry-bridge' },
@@ -58,7 +58,7 @@ export default defineConfig({
 						{
 							label: 'Booleans',
 							items: [
-								{ label: 'Hub', slug: 'occt/maps/hub-booleans' },
+								{ label: 'Overview', slug: 'occt/maps/hub-booleans' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-booleans' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-booleans' },
 								{ label: 'Walkthrough', slug: 'occt/walkthroughs/booleans' },
@@ -69,7 +69,7 @@ export default defineConfig({
 						{
 							label: 'Fillets',
 							items: [
-								{ label: 'Hub', slug: 'occt/maps/hub-fillets' },
+								{ label: 'Overview', slug: 'occt/maps/hub-fillets' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-fillets' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-fillets' },
 								{ label: 'Algorithm (ChFi3d)', slug: 'occt/dossiers/algorithm-fillets-chfi3d' },
@@ -81,7 +81,7 @@ export default defineConfig({
 						{
 							label: 'Shape Healing + Analysis',
 							items: [
-								{ label: 'Hub', slug: 'occt/maps/hub-shape-healing-analysis' },
+								{ label: 'Overview', slug: 'occt/maps/hub-shape-healing-analysis' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-shape-healing-analysis' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-shape-healing-analysis' },
 								{ label: 'Walkthrough', slug: 'occt/walkthroughs/shape-healing-analysis' },
@@ -98,7 +98,7 @@ export default defineConfig({
 						{
 							label: 'Meshing',
 							items: [
-								{ label: 'Hub', slug: 'occt/maps/hub-meshing' },
+								{ label: 'Overview', slug: 'occt/maps/hub-meshing' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-meshing' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-meshing' },
 								{ label: 'Walkthrough', slug: 'occt/walkthroughs/meshing' },
@@ -109,7 +109,7 @@ export default defineConfig({
 						{
 							label: 'Data Exchange',
 							items: [
-								{ label: 'Hub', slug: 'occt/maps/hub-data-exchange' },
+								{ label: 'Overview', slug: 'occt/maps/hub-data-exchange' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-data-exchange' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-data-exchange' },
 								{ label: 'Walkthrough', slug: 'occt/walkthroughs/data-exchange' },
@@ -120,7 +120,7 @@ export default defineConfig({
 						{
 							label: 'Visualization',
 							items: [
-								{ label: 'Hub', slug: 'occt/maps/hub-visualization' },
+								{ label: 'Overview', slug: 'occt/maps/hub-visualization' },
 								{ label: 'Lane Map', slug: 'occt/maps/lane-visualization' },
 								{ label: 'Dossier', slug: 'occt/dossiers/lane-visualization' },
 								{ label: 'Walkthrough', slug: 'occt/walkthroughs/visualization' },
