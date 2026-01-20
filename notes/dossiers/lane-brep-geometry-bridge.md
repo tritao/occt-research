@@ -69,6 +69,7 @@ The key ideas to internalize:
 - `occt/src/BRep/BRep_Tool.hxx` — `BRep_Tool` (geometry accessors for faces/edges/vertices, triangulations, tolerances)
 - `occt/src/BRep/BRep_Tool.cxx` — `BRep_Tool::Curve`, `BRep_Tool::CurveOnSurface`, `BRep_Tool::CurveOnPlane`, `BRep_Tool::Tolerance`, `BRep_Tool::Pnt`, `BRep_Tool::Parameter`, `BRep_Tool::IsClosed`
 - `occt/src/BRepAdaptor/BRepAdaptor_Curve.hxx` — `BRepAdaptor_Curve` (edge-as-curve adapter; 3D-vs-pcurve selection; location-aware)
+- `notes/dossiers/api-brepadaptor-curve-line.md` — `BRepAdaptor_Curve::Line()` (type precondition, representation choice, location transform)
 - `occt/src/BRepBuilderAPI/BRepBuilderAPI_MakeShape.hxx` — `BRepBuilderAPI_MakeShape::Shape`, `Generated`, `Modified`, `IsDeleted` (builder result + history API)
 - `occt/src/BRepTools/BRepTools.hxx` — `BRepTools::UVBounds`, `BRepTools::Update`, triangulation load/unload/activate helpers (post-processing utilities)
 
