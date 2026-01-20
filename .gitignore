@@ -4,7 +4,7 @@
 .venv/
 
 # OCCT checkout + build
-occt/
+/occt/
 build-occt/
 compile_commands.json
 

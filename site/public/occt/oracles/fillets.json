@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "occt_version": "7.9.3",
+    "occt_dev": ""
+  },
+  "inputs": {
+    "box": { "bbox": { "is_void": false, "min": [-9.9999999999999995e-08, -9.9999999999999995e-08, -9.9999999999999995e-08], "max": [10.000000099999999, 10.000000099999999, 10.000000099999999] }, "counts": { "solids": 1, "faces": 6, "edges": 12, "vertices": 8 } }
+    ,
+    "cylinder_split": { "bbox": { "is_void": false, "min": [-5.0000001000000003, -5.0000001000000003, -9.9999999999999995e-08], "max": [5.0000001000000003, 5.0000001000000003, 10.000000099999999] }, "counts": { "solids": 1, "faces": 4, "edges": 6, "vertices": 4 } }
+  },
+  "cases": {
+    "single_edge_radius_1": {
+      "kind": "fillet",
+      "params": { "radius": 1 },
+      "selection": { "edges_added": 1 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": true,
+        "nb_contours": 1,
+        "nb_surfaces": 2,
+        "nb_faulty_contours": 0,
+        "faulty_contours": [],
+        "nb_faulty_vertices": 0,
+        "faulty_vertices": [],
+        "has_result": false,
+        "generated_faces_from_selected_edges": 1,
+        "contours": [
+          {"ic": 1, "nb_edges": 1, "edge_indices": [1], "nb_surf": 1, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok", "nb_computed_surfaces": 1, "computed_surface_types": {"Geom_CylindricalSurface": 1}}
+        ]
+      },
+      "result": {
+        "is_valid": true,
+        "counts": { "solids": 1, "faces": 7, "edges": 15, "vertices": 10 },
+        "bbox": { "is_void": false, "min": [-1.000000002220446e-07, -1.000000002220446e-07, -9.9999999999999995e-08], "max": [10.000000099999999, 10.000000099999999, 10.000000099999999] },
+        "surface_types": {"Geom_CylindricalSurface": 1, "Geom_Plane": 6}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      },
+      "artifacts": {
+        "enabled": true,
+        "input_mesh": "artifacts/single_edge_radius_1/input.mesh.json",
+        "result_mesh": "artifacts/single_edge_radius_1/result.mesh.json",
+        "bad_mesh": "artifacts/single_edge_radius_1/bad.mesh.json",
+        "wrote_input": true,
+        "wrote_result": true,
+        "wrote_bad": false
+      }
+    },
+    "corner_3_edges_radius_1": {
+      "kind": "fillet",
+      "params": { "radius": 1 },
+      "selection": { "edges_added": 3 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": true,
+        "nb_contours": 3,
+        "nb_surfaces": 7,
+        "nb_faulty_contours": 0,
+        "faulty_contours": [],
+        "nb_faulty_vertices": 0,
+        "faulty_vertices": [],
+        "has_result": false,
+        "generated_faces_from_selected_edges": 3,
+        "contours": [
+          {"ic": 1, "nb_edges": 1, "edge_indices": [1], "nb_surf": 1, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok", "nb_computed_surfaces": 1, "computed_surface_types": {"Geom_CylindricalSurface": 1}},
+          {"ic": 2, "nb_edges": 1, "edge_indices": [4], "nb_surf": 1, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok", "nb_computed_surfaces": 1, "computed_surface_types": {"Geom_CylindricalSurface": 1}},
+          {"ic": 3, "nb_edges": 1, "edge_indices": [9], "nb_surf": 1, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok", "nb_computed_surfaces": 1, "computed_surface_types": {"Geom_CylindricalSurface": 1}}
+        ]
+      },
+      "result": {
+        "is_valid": true,
+        "counts": { "solids": 1, "faces": 10, "edges": 22, "vertices": 13 },
+        "bbox": { "is_void": false, "min": [-1.000000002220446e-07, -1.000000002220446e-07, -1.000000002220446e-07], "max": [10.000000099999999, 10.000000099999999, 10.000000099999999] },
+        "surface_types": {"Geom_CylindricalSurface": 3, "Geom_Plane": 6, "Geom_SphericalSurface": 1}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      },
+      "artifacts": {
+        "enabled": true,
+        "input_mesh": "artifacts/corner_3_edges_radius_1/input.mesh.json",
+        "result_mesh": "artifacts/corner_3_edges_radius_1/result.mesh.json",
+        "bad_mesh": "artifacts/corner_3_edges_radius_1/bad.mesh.json",
+        "wrote_input": true,
+        "wrote_result": true,
+        "wrote_bad": false
+      }
+    },
+    "cylinder_split_rim_radius_1": {
+      "kind": "fillet",
+      "params": { "radius": 1 },
+      "selection": { "edges_added": 2 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": true,
+        "nb_contours": 1,
+        "nb_surfaces": 4,
+        "nb_faulty_contours": 0,
+        "faulty_contours": [],
+        "nb_faulty_vertices": 0,
+        "faulty_vertices": [],
+        "has_result": false,
+        "generated_faces_from_selected_edges": 2,
+        "contours": [
+          {"ic": 1, "nb_edges": 2, "edge_indices": [4, 6], "nb_surf": 2, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok", "nb_computed_surfaces": 2, "computed_surface_types": {"Geom_ToroidalSurface": 2}}
+        ]
+      },
+      "result": {
+        "is_valid": true,
+        "counts": { "solids": 1, "faces": 6, "edges": 10, "vertices": 6 },
+        "bbox": { "is_void": false, "min": [-5.4119611014619702, -5.4119611014619702, -9.9999999999999995e-08], "max": [5.4119611014619702, 5.4119611014619702, 10.000000099999999] },
+        "surface_types": {"Geom_CylindricalSurface": 2, "Geom_Plane": 2, "Geom_ToroidalSurface": 2}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      },
+      "artifacts": {
+        "enabled": true,
+        "input_mesh": "artifacts/cylinder_split_rim_radius_1/input.mesh.json",
+        "result_mesh": "artifacts/cylinder_split_rim_radius_1/result.mesh.json",
+        "bad_mesh": "artifacts/cylinder_split_rim_radius_1/bad.mesh.json",
+        "wrote_input": true,
+        "wrote_result": true,
+        "wrote_bad": false
+      }
+    },
+    "single_edge_var_radius_0_5_to_2": {
+      "kind": "fillet",
+      "params": { "r1": 0.5, "r2": 2 },
+      "selection": { "edges_added": 1 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": true,
+        "nb_contours": 1,
+        "nb_surfaces": 1,
+        "nb_faulty_contours": 0,
+        "faulty_contours": [],
+        "nb_faulty_vertices": 0,
+        "faulty_vertices": [],
+        "has_result": false,
+        "generated_faces_from_selected_edges": 1,
+        "contours": [
+          {"ic": 1, "nb_edges": 1, "edge_indices": [1], "nb_surf": 1, "stripe_status": 0, "stripe_status_name": "ChFiDS_Ok", "nb_computed_surfaces": 1, "computed_surface_types": {"Geom_BSplineSurface": 1}}
+        ]
+      },
+      "result": {
+        "is_valid": true,
+        "counts": { "solids": 1, "faces": 7, "edges": 15, "vertices": 10 },
+        "bbox": { "is_void": false, "min": [-1.0000000004068341e-07, -1.0000000008326672e-07, -0.61200009999999905], "max": [10.000000099999999, 10.000000099999999, 10.612000099999998] },
+        "surface_types": {"Geom_BSplineSurface": 1, "Geom_Plane": 6}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      },
+      "artifacts": {
+        "enabled": true,
+        "input_mesh": "artifacts/single_edge_var_radius_0_5_to_2/input.mesh.json",
+        "result_mesh": "artifacts/single_edge_var_radius_0_5_to_2/result.mesh.json",
+        "bad_mesh": "artifacts/single_edge_var_radius_0_5_to_2/bad.mesh.json",
+        "wrote_input": true,
+        "wrote_result": true,
+        "wrote_bad": false
+      }
+    },
+    "single_edge_radius_100": {
+      "kind": "fillet",
+      "params": { "radius": 100 },
+      "selection": { "edges_added": 1 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": false,
+        "nb_contours": 1,
+        "nb_surfaces": 0,
+        "nb_faulty_contours": 1,
+        "faulty_contours": [1],
+        "nb_faulty_vertices": 0,
+        "faulty_vertices": [],
+        "has_result": false,
+        "generated_faces_from_selected_edges": 0,
+        "contours": [
+          {"ic": 1, "nb_edges": 1, "edge_indices": [1], "nb_surf": 0, "stripe_status": 3, "stripe_status_name": "ChFiDS_StartsolFailure", "nb_computed_surfaces": 0, "computed_surface_types": {}}
+        ]
+      },
+      "result": {
+        "is_valid": false,
+        "counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bbox": { "is_void": true },
+        "surface_types": {}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      },
+      "artifacts": {
+        "enabled": true,
+        "input_mesh": "artifacts/single_edge_radius_100/input.mesh.json",
+        "result_mesh": "artifacts/single_edge_radius_100/result.mesh.json",
+        "bad_mesh": "artifacts/single_edge_radius_100/bad.mesh.json",
+        "wrote_input": true,
+        "wrote_result": false,
+        "wrote_bad": false
+      }
+    },
+    "single_edge_chamfer_dist_1": {
+      "kind": "chamfer",
+      "params": { "dist": 1 },
+      "selection": { "edges_added": 1 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": true,
+        "nb_contours": 1,
+        "nb_surfaces": -1,
+        "nb_faulty_contours": -1,
+        "faulty_contours": [],
+        "nb_faulty_vertices": -1,
+        "faulty_vertices": [],
+        "has_result": false,
+        "generated_faces_from_selected_edges": 1,
+        "contours": [
+          {"ic": 1, "nb_edges": 1, "edge_indices": [1], "nb_surf": 1, "stripe_status": -1, "stripe_status_name": "N/A", "nb_computed_surfaces": -1, "computed_surface_types": {}}
+        ]
+      },
+      "result": {
+        "is_valid": true,
+        "counts": { "solids": 1, "faces": 7, "edges": 15, "vertices": 10 },
+        "bbox": { "is_void": false, "min": [-1.0000000016653345e-07, -1.0000000016653345e-07, -9.9999999999999995e-08], "max": [10.000000099999999, 10.000000099999999, 10.000000099999999] },
+        "surface_types": {"Geom_Plane": 7}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      },
+      "artifacts": {
+        "enabled": true,
+        "input_mesh": "artifacts/single_edge_chamfer_dist_1/input.mesh.json",
+        "result_mesh": "artifacts/single_edge_chamfer_dist_1/result.mesh.json",
+        "bad_mesh": "artifacts/single_edge_chamfer_dist_1/bad.mesh.json",
+        "wrote_input": true,
+        "wrote_result": true,
+        "wrote_bad": false
+      }
+    },
+    "corner_3_edges_chamfer_dist_1": {
+      "kind": "chamfer",
+      "params": { "dist": 1 },
+      "selection": { "edges_added": 3 },
+      "build": {
+        "did_throw": false,
+        "exception": "",
+        "is_done": true,
+        "nb_contours": 3,
+        "nb_surfaces": -1,
+        "nb_faulty_contours": -1,
+        "faulty_contours": [],
+        "nb_faulty_vertices": -1,
+        "faulty_vertices": [],
+        "has_result": false,
+        "generated_faces_from_selected_edges": 3,
+        "contours": [
+          {"ic": 1, "nb_edges": 1, "edge_indices": [1], "nb_surf": 1, "stripe_status": -1, "stripe_status_name": "N/A", "nb_computed_surfaces": -1, "computed_surface_types": {}},
+          {"ic": 2, "nb_edges": 1, "edge_indices": [4], "nb_surf": 1, "stripe_status": -1, "stripe_status_name": "N/A", "nb_computed_surfaces": -1, "computed_surface_types": {}},
+          {"ic": 3, "nb_edges": 1, "edge_indices": [9], "nb_surf": 1, "stripe_status": -1, "stripe_status_name": "N/A", "nb_computed_surfaces": -1, "computed_surface_types": {}}
+        ]
+      },
+      "result": {
+        "is_valid": true,
+        "counts": { "solids": 1, "faces": 10, "edges": 21, "vertices": 13 },
+        "bbox": { "is_void": false, "min": [-1.000000003330669e-07, -1.000000003330669e-07, -1.0000000016653345e-07], "max": [10.000000099999999, 10.000000099999999, 10.000000099999999] },
+        "surface_types": {"Geom_Plane": 10}
+      },
+      "partial_result": {
+        "has_bad_shape": false,
+        "bad_shape_counts": { "solids": 0, "faces": 0, "edges": 0, "vertices": 0 },
+        "bad_shape_bbox": { "is_void": true }
+      },
+      "artifacts": {
+        "enabled": true,
+        "input_mesh": "artifacts/corner_3_edges_chamfer_dist_1/input.mesh.json",
+        "result_mesh": "artifacts/corner_3_edges_chamfer_dist_1/result.mesh.json",
+        "bad_mesh": "artifacts/corner_3_edges_chamfer_dist_1/bad.mesh.json",
+        "wrote_input": true,
+        "wrote_result": true,
+        "wrote_bad": false
+      }
+    }
+  }
+}

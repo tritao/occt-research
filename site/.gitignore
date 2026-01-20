@@ -9,6 +9,9 @@ node_modules/
 # sync temp files
 .sync_tmp/
 
+# generated synced docs (from ../tools/sync_starlight_site.py)
+src/content/docs/occt/
+
 # editor
 .vscode/
 
