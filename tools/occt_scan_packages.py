@@ -1,4 +1,3 @@
-\
 #!/usr/bin/env python3
 import argparse, json, re
 from pathlib import Path
@@ -13,7 +12,7 @@ def main():
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
-    repo_root = Path.cwd().resolve()
+    repo_root = Path(__file__).resolve().parents[1]
     occt = Path(args.occt).resolve()
     src = occt / "src"
     out_dir = Path(args.out).resolve()
@@ -64,7 +63,7 @@ def main():
         "header_to_pkg": header_to_pkg,
     }
 
-    (out_dir / "packages.json").write_text(json.dumps(data, indent=2))
+    (out_dir / "packages.json").write_text(json.dumps(data, indent=2) + "\n")
 
     # human summary
     lines = ["# OCCT package scan", f"- root: `{occt_label}`", f"- packages: **{len(packages)}**", ""]

@@ -1,6 +1,6 @@
 # FreeCAD Project 32 (view 1): exported issues
 
-- Root: `/home/joao/dev/occt-research-bootstrap/notes/issues/freecad-project-32-view-1`
+- Root: `notes/issues/freecad`
 - Total issues: `170`
 
 ## Topics

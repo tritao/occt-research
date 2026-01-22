@@ -1,5 +1,5 @@
 # OCCT package scan
-- root: `/home/joao/dev/occt-research-bootstrap/occt`
+- root: `occt`
 - packages: **401**
 
 ## Top packages by source files

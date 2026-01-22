@@ -1,5 +1,5 @@
 {
-  "occt_root": "/home/joao/dev/occt-research-bootstrap/occt",
+  "occt_root": "occt",
   "n_packages": 401,
   "packages": {
     "AIS": {

@@ -29,7 +29,7 @@ def slugify(s: str, *, max_len: int = 80) -> str:
 
 
 def fetch_text(url: str) -> str:
-    req = Request(url, headers={"User-Agent": "occt-research-bootstrap/fillets-export"})
+    req = Request(url, headers={"User-Agent": "occt-research/fillets-export"})
     with urlopen(req, timeout=60) as fp:  # noqa: S310 (trusted URL)
         data = fp.read()
     return data.decode("utf-8", errors="replace")
@@ -111,8 +111,8 @@ def main() -> int:
     ap.add_argument("--repo", default=REPO_DEFAULT)
     ap.add_argument(
         "--out-dir",
-        default="notes/issues/freecad-project-32-view-1",
-        help="Output directory for markdown files (default: notes/issues/freecad-project-32-view-1)",
+        default="notes/issues/freecad",
+        help="Output directory for markdown files (default: notes/issues/freecad)",
     )
     ap.add_argument("--limit", type=int, default=0, help="If set, only export first N issues")
     args = ap.parse_args()

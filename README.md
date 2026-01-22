@@ -1,4 +1,4 @@
-# OCCT Research Bootstrap (Linux Mint / apt)
+# OCCT Research (Linux Mint / apt)
 
 This repo skeleton bootstraps a repeatable OCCT reverse-engineering + documentation workflow:
 
@@ -14,7 +14,7 @@ This repo skeleton bootstraps a repeatable OCCT reverse-engineering + documentat
 
 ```bash
 # 1) unzip, then:
-cd occt-research-bootstrap
+cd occt-research
 
 # 2) one command bootstrap (will ask for sudo for apt packages)
 ./bootstrap.sh

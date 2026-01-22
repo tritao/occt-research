@@ -78,8 +78,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "--dir",
-        default="notes/issues/freecad-project-32-view-1",
-        help="Directory containing exported markdown files (default: notes/issues/freecad-project-32-view-1)",
+        default="notes/issues/freecad",
+        help="Directory containing exported markdown files (default: notes/issues/freecad)",
     )
     ap.add_argument(
         "--dry-run",
@@ -88,9 +88,14 @@ def main() -> int:
     )
     args = ap.parse_args()
 
+    repo_root = Path(__file__).resolve().parents[1]
     base = Path(args.dir).resolve()
     if not base.is_dir():
         raise SystemExit(f"Missing dir: {base}")
+    try:
+        base_label = str(base.relative_to(repo_root))
+    except ValueError:
+        base_label = str(base)
 
     # Gather all issue markdown files recursively, excluding README.md files.
     issue_paths = [p for p in base.rglob("*.md") if p.is_file() and p.name != "README.md"]
@@ -165,7 +170,7 @@ def main() -> int:
         top = [
             "# FreeCAD Project 32 (view 1): exported issues",
             "",
-            f"- Root: `{base}`",
+            f"- Root: `{base_label}`",
             f"- Total issues: `{len(issues)}`",
             "",
             "## Topics",

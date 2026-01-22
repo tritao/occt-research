@@ -22,7 +22,7 @@ CLANGD_INDEX_PATTERNS = [
 ]
 
 def http_json(url: str):
-    req = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json", "User-Agent": "occt-research-bootstrap"})
+    req = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json", "User-Agent": "occt-research"})
     with urllib.request.urlopen(req) as r:
         return json.loads(r.read().decode("utf-8"))
 
@@ -31,7 +31,7 @@ def download(url: str, dest: Path):
     if dest.exists():
         return
     print(f"[clangd] downloading {url}")
-    req = urllib.request.Request(url, headers={"User-Agent": "occt-research-bootstrap"})
+    req = urllib.request.Request(url, headers={"User-Agent": "occt-research"})
     with urllib.request.urlopen(req) as r, open(dest, "wb") as f:
         shutil.copyfileobj(r, f)
 
