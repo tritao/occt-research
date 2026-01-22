@@ -1,4 +1,3 @@
-\
 #!/usr/bin/env python3
 
 import argparse, json, os, re, shutil, sys, tarfile, urllib.request, zipfile
